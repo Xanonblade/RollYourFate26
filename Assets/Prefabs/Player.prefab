@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 8060327933321302052}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -269,6 +269,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FPLook
   lookSpeed: 50
+  maxPitch: 60
+  minPitch: -65
+  maxYaw: 80
+  minYaw: -80
   playerCam: {fileID: 8676257741085197242}
 --- !u!114 &5570282512848761840
 MonoBehaviour:

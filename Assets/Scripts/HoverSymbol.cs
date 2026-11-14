@@ -12,14 +12,12 @@ public class HoverSymbol : MonoBehaviour
     [SerializeField] Texture2D burnIcon;
     [SerializeField] Texture2D growIcon;
 
-    SpriteRenderer spriteRenderer;
+    SpriteRenderer[] sprites;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        Texture2D texture = new Texture2D(SPELL_NUMBER * ICON_PIXEL_SIZE, ICON_PIXEL_SIZE);
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = Sprite.Create(texture, new Rect(), new Vector2(0, 0));
+        sprites = GetComponentsInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -47,6 +45,15 @@ public class HoverSymbol : MonoBehaviour
 
         for (int i = 0; i < validSymbols.Count; i++)
         {
+            sprites[i].transform.position = transform.position + transform.right * (-1 * ((validSymbols.Count - 1) / 2f) + 1 * i);
+            Debug.Log(-1 * ((validSymbols.Count - 1) / 2f) + 1 * i);
+
+
+            sprites[i].sprite = Sprite.Create(validSymbols[i], new Rect(0, 0, ICON_PIXEL_SIZE, ICON_PIXEL_SIZE), Vector2.zero);
+        }
+        /*
+        for (int i = 0; i < validSymbols.Count; i++)
+        {
             for (int j = 0; j < ICON_PIXEL_SIZE; j++)
             {
                 for (int k = 0; k < ICON_PIXEL_SIZE; k++)
@@ -57,21 +64,6 @@ public class HoverSymbol : MonoBehaviour
         }
 
         spriteRenderer.sprite.texture.Apply();
-
-        // Encode texture into PNG format
-        byte[] bytes = spriteRenderer.sprite.texture.EncodeToPNG();
-
-        // Define the save path (persistentDataPath works across all platforms)
-        string folderPath = Application.persistentDataPath;
-        if (!Directory.Exists(folderPath))
-        {
-            Directory.CreateDirectory(folderPath);
-        }
-
-        string filePath = Path.Combine(folderPath, "CombinedTexture" + ".png");
-
-        // Write the bytes to disk
-        File.WriteAllBytes(filePath, bytes);
-        Debug.Log("Saved texture to: " + filePath);
+        */
     }
 }
