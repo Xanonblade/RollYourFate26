@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-
 public class MainMenuScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,6 +17,6 @@ public class MainMenuScript : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadScene(1);
+        LevelManager.NextLevel();
     }
 }
