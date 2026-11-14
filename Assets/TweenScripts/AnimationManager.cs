@@ -8,14 +8,14 @@ public class AnimationManager : MonoBehaviour
 {
     public static AnimationManager Instance;
 
-    [SerializeField] private Dictionary<string, Animation> animationObjects = new Dictionary<string, Animation>();
+    [SerializeField] private Dictionary<string, AnimationData> animationObjects = new Dictionary<string, AnimationData>();
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public void AddAnimation(Animation anim)
+    public void AddAnimation(AnimationData anim)
     {
         animationObjects.Add(anim.Name, anim);
     }

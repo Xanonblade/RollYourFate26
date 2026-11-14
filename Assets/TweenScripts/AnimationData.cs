@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// A animation of an object that moves it through multiple states 
 /// </summary>
-public class Animation : MonoBehaviour
+public class AnimationData : MonoBehaviour
 {
     [Header("Animation")]
     [SerializeField] private GameObject[] targetObjects;
