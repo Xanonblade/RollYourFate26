@@ -27,12 +27,14 @@ public class InteractableObject : MonoBehaviour
     void Start()
     {
         AnimationData[] anims = GetComponents<AnimationData>();
+        validSpells = new Dictionary<Spells, AnimationData>();
 
         //populate animations to play
         for (int i = 0; i < anims.Length; i++)
         {
             validSpells.Add((Spells)Enum.Parse(typeof(Spells), anims[i].Name), anims[i]);
         }
+
     }
 
     // Update is called once per frame
