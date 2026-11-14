@@ -15,6 +15,8 @@ public class TimedEventsManager : MonoBehaviour
     {
         Instance = this;
         clock = 0;
+
+        scenario = LevelManager.CurrentScenario;
     }
 
     private void Update()

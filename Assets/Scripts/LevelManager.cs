@@ -41,14 +41,24 @@ public static class LevelManager
 
     private static List<Scenario> uncompletedScenarios;
 
-    private static Vector3 spawnLocation;
+    private static Transform spawnTransform;
 
     private static Scenario currentLevel;
 
     /// <summary>
-    /// Which location to spawn the player at when the scene loads
+    /// The location to spawn the player at when the scene loads
     /// </summary>
-    public static Vector3 SpawnLocation => spawnLocation;
+    public static Vector3 SpawnLocation => spawnTransform.position;
+
+    /// <summary>
+    /// The rotation to give the player when the scene loads
+    /// </summary>
+    public static Quaternion SpawnRotation => spawnTransform.rotation;
+
+    /// <summary>
+    /// The current scenario loaded
+    /// </summary>
+    public static Scenario CurrentScenario { get { return currentLevel; } }
 
     /// <summary>
     /// Load an unloaded level scene
@@ -93,9 +103,8 @@ public static class LevelManager
         Debug.Log(temp);
 
         //find correct spawn position
-        spawnLocation = GameObject.FindWithTag("SpawnPoints")
+        spawnTransform = GameObject.FindWithTag("SpawnPoints")
             .GetComponent<SpawnPoints>()
-            .SpawnPointsList[scenarioData.Item2]
-            .position;
+            .SpawnPointsList[scenarioData.Item2];
     }
 }
