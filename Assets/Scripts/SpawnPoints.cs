@@ -12,7 +12,6 @@ public class SpawnPoints : MonoBehaviour
     {
         spawnPoints = GetComponentsInChildren<Transform>().ToList();
         spawnPoints.Remove(transform);
-        // Debug.Log(spawnPoints.Count);
     }
 
 }

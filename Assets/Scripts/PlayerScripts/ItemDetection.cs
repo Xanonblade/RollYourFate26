@@ -5,7 +5,6 @@ public class ItemDetection : MonoBehaviour
 {
     private void Update()
     {
-        //TODO: change ray to have vertical rotation
         Camera current = Camera.main;
         Ray fireRay = new Ray(current.transform.position, current.transform.forward);
 
