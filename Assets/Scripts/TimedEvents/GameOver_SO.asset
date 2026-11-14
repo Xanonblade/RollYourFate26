@@ -16,3 +16,4 @@ MonoBehaviour:
   timeToActivate: 10
   eventType: 1
   actionID: game_is_over
+  actionID2: 

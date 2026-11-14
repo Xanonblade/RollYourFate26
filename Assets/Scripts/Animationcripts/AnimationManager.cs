@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,6 +37,16 @@ public class AnimationManager : MonoBehaviour
         if (animationObjects.ContainsKey(animationKey))
         {
             animationObjects[animationKey].StartAnimation();
+            return true;
+        }
+        return false;
+    }
+
+    public bool TriggerAnimation(string animationKey, Action onComplete)
+    {
+        if (animationObjects.TryGetValue(animationKey, out var anim))
+        {
+            anim.StartAnimation(onComplete);
             return true;
         }
         return false;

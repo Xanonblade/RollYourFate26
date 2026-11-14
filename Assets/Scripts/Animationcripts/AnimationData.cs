@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -12,7 +13,11 @@ public class AnimationData : MonoBehaviour
     [SerializeField] private string nameID;
 
     private int moveIndex;
+    private bool moveFinished;
     private int rotateIndex;
+    private bool rotateFinished;
+
+    private Action onCompleteAction;
 
     [SerializeField] public readonly int IncomingFlag = 0;
     [SerializeField] public readonly int OutgoingFlag = 1;
@@ -30,12 +35,43 @@ public class AnimationData : MonoBehaviour
     /// </summary>
     public void StartAnimation()
     {
-        transform.DOMove(Position(), MoveDuration()).onComplete = () =>
-        { ContinueMoveAnimation(); };
-
-        transform.DORotate(Rotation(), RotateDuration()).onComplete = () =>
-        { ContinueRotateAnimation(); };
+        StartAnimation(null);
     }
+
+    /// <summary>
+    /// Starts playing the animation with given function invoked on completion
+    /// </summary>
+    /// <param name="onComplete">The function to play on complete</param>
+    public void StartAnimation(Action onComplete)
+    {
+        // This couldl be a bug starter
+        transform.DOKill();
+
+        onCompleteAction = onComplete;
+
+        moveIndex = 0;
+        rotateIndex = 0;
+
+        moveFinished = false;
+        rotateFinished = false;
+
+        transform.DOMove(Position(), MoveDuration())
+            .OnComplete(ContinueMoveAnimation);
+        transform.DORotate(Rotation(), RotateDuration())
+            .OnComplete(ContinueRotateAnimation);
+    }
+
+    /**
+    /// <summary>
+    /// Starts playing the animation with a on complete action
+    /// </summary>
+    public void StartAnimation(Action action)
+    {
+        onCompleteAction = action;
+
+        StartAnimation();
+    }
+    **/
 
     /// <summary>
     /// Starts the next movement of the animation
@@ -43,10 +79,13 @@ public class AnimationData : MonoBehaviour
     private void ContinueMoveAnimation()
     {
         moveIndex++;
-        if (moveIndex >= targetObjects.Length) return;
-
-        transform.DOMove(Position(), MoveDuration()).onComplete = () =>
-        { ContinueMoveAnimation(); };
+        if (moveIndex >= targetObjects.Length)
+        {
+            moveFinished = true;
+            TryFinish();
+            return;
+        }
+        transform.DOMove(Position(), MoveDuration()).OnComplete(ContinueMoveAnimation);
     }
 
     /// <summary>
@@ -55,10 +94,25 @@ public class AnimationData : MonoBehaviour
     private void ContinueRotateAnimation()
     {
         rotateIndex++;
-        if (rotateIndex >= targetObjects.Length) return;
+        if (rotateIndex >= targetObjects.Length)
+        {
+            rotateFinished = true;
+            TryFinish();
+            return;
+        }
+        transform.DORotate(Rotation(), RotateDuration()).OnComplete(ContinueRotateAnimation);
+    }
 
-        transform.DORotate(Rotation(), RotateDuration()).onComplete = () =>
-        {ContinueRotateAnimation();};
+    /// <summary>
+    /// Trys to complete the onComplete action
+    /// </summary>
+    private void TryFinish()
+    {
+        if (!moveFinished || !rotateFinished) return;
+
+        var cb = onCompleteAction;
+        onCompleteAction = null;
+        cb?.Invoke();
     }
 
     /// <summary>
