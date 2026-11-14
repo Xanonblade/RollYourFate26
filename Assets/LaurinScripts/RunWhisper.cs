@@ -54,51 +54,51 @@ public class RunWhisper : MonoBehaviour
 	Tensor<int> tokensTensor;
 	Tensor<float> audioInput;
 
-	public async void Start()
+	public async void Whisper()
 	{
-		SetupWhiteSpaceShifts();
-		GetTokens();
+        SetupWhiteSpaceShifts();
+        GetTokens();
 
-		decoder1 = new Worker(ModelLoader.Load(audioDecoder1), BackendType.GPUCompute);
-		decoder2 = new Worker(ModelLoader.Load(audioDecoder2), BackendType.GPUCompute);
+        decoder1 = new Worker(ModelLoader.Load(audioDecoder1), BackendType.GPUCompute);
+        decoder2 = new Worker(ModelLoader.Load(audioDecoder2), BackendType.GPUCompute);
 
-		FunctionalGraph graph = new FunctionalGraph();
-		var input = graph.AddInput(DataType.Float, new DynamicTensorShape(1, 1, 51865));
-		var amax = Functional.ArgMax(input, -1, false);
-		var selectTokenModel = graph.Compile(amax);
-		argmax = new Worker(selectTokenModel, BackendType.GPUCompute);
+        FunctionalGraph graph = new FunctionalGraph();
+        var input = graph.AddInput(DataType.Float, new DynamicTensorShape(1, 1, 51865));
+        var amax = Functional.ArgMax(input, -1, false);
+        var selectTokenModel = graph.Compile(amax);
+        argmax = new Worker(selectTokenModel, BackendType.GPUCompute);
 
-		encoder = new Worker(ModelLoader.Load(audioEncoder), BackendType.GPUCompute);
-		spectrogram = new Worker(ModelLoader.Load(logMelSpectro), BackendType.GPUCompute);
+        encoder = new Worker(ModelLoader.Load(audioEncoder), BackendType.GPUCompute);
+        spectrogram = new Worker(ModelLoader.Load(logMelSpectro), BackendType.GPUCompute);
 
-		outputTokens = new NativeArray<int>(maxTokens, Allocator.Persistent);
+        outputTokens = new NativeArray<int>(maxTokens, Allocator.Persistent);
 
-		outputTokens[0] = START_OF_TRANSCRIPT;
-		outputTokens[1] = ENGLISH;
-		outputTokens[2] = TRANSCRIBE;
+        outputTokens[0] = START_OF_TRANSCRIPT;
+        outputTokens[1] = ENGLISH;
+        outputTokens[2] = TRANSCRIBE;
 
-		tokenCount = 3;
+        tokenCount = 3;
 
-		await RecordThenPrepareAudio();
+        await RecordThenPrepareAudio();
 
-		tokensTensor = new Tensor<int>(new TensorShape(1, maxTokens));
-		ComputeTensorData.Pin(tokensTensor);
-		tokensTensor.Reshape(new TensorShape(1, tokenCount));
-		tokensTensor.dataOnBackend.Upload<int>(outputTokens, tokenCount);
+        tokensTensor = new Tensor<int>(new TensorShape(1, maxTokens));
+        ComputeTensorData.Pin(tokensTensor);
+        tokensTensor.Reshape(new TensorShape(1, tokenCount));
+        tokensTensor.dataOnBackend.Upload<int>(outputTokens, tokenCount);
 
-		lastToken = new NativeArray<int>(1, Allocator.Persistent);
-		lastToken[0] = NO_TIME_STAMPS;
-		lastTokenTensor = new Tensor<int>(new TensorShape(1, 1), new[] { NO_TIME_STAMPS });
+        lastToken = new NativeArray<int>(1, Allocator.Persistent);
+        lastToken[0] = NO_TIME_STAMPS;
+        lastTokenTensor = new Tensor<int>(new TensorShape(1, 1), new[] { NO_TIME_STAMPS });
 
-		while (true)
-		{
-			if (!transcribe || tokenCount >= outputTokens.Length - 1)
-				return;
+        while (true)
+        {
+            if (!transcribe || tokenCount >= outputTokens.Length - 1)
+                return;
 
-			m_Awaitable = InferenceStep();
-			await m_Awaitable;
-		}
-	}
+            m_Awaitable = InferenceStep();
+            await m_Awaitable;
+        }
+    }
 
 	async Awaitable RecordThenPrepareAudio()
 	{
