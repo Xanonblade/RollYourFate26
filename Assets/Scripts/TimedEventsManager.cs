@@ -2,9 +2,9 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour
+public class TimedEventsManager : MonoBehaviour
 {
-    public static TimeManager Instance;
+    public static TimedEventsManager Instance;
     public List<TimedEvent> events = new List<TimedEvent>();
     public Scenario scenario;
     private float clock;

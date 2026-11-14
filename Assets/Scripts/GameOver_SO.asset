@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GameOver_SO
   m_EditorClassIdentifier: Assembly-CSharp::TimedEvent
   setScenario: 0
-  timeToActivate: 0
-  eventType: 0
-  actionID: 
+  timeToActivate: 10
+  eventType: 1
+  actionID: game_is_over
