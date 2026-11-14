@@ -2,17 +2,21 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour
+public class TimedEventsManager : MonoBehaviour
 {
-    public static TimeManager Instance;
+    public static TimedEventsManager Instance;
     public List<TimedEvent> events = new List<TimedEvent>();
     public Scenario scenario;
     private float clock;
+
+    [SerializeField] private GameObject gameOverPrefab;
 
     private void Awake()
     {
         Instance = this;
         clock = 0;
+
+        scenario = LevelManager.CurrentScenario;
     }
 
     private void Update()
@@ -31,11 +35,19 @@ public class TimeManager : MonoBehaviour
                     case EventType.ANIMATION:
                         AnimationManager.Instance.TriggerAnimation(events[i].actionID);
                         break;
+                    case EventType.END_GAME:
+                        GameOver();
+                        break;
                 }
 
                 events.Remove(events[i]);
                 i--;
             }
         }
+    }
+
+    private void GameOver()
+    {
+        GameObject.Instantiate(gameOverPrefab).SetActive(true);
     }
 }

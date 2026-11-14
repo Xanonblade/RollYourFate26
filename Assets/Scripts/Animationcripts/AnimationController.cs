@@ -5,9 +5,9 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour
 {
     [SerializeField] private AnimationData[] animationData;
-    [SerializeField] private string name;
+    [SerializeField] private string controllerID;
 
-    public string Name { get { return name; } }
+    public string Name { get { return controllerID; } }
 
     private void Awake()
     {
