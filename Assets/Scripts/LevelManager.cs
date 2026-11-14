@@ -33,8 +33,8 @@ public static class LevelManager
     };
 
     private static Dictionary<Era, int> eraSceneIDs = new Dictionary<Era, int>() {
-        {Era.WildWest, 1 },
-        {Era.Medieval, 2 },
+        {Era.WildWest, 2 },
+        {Era.Medieval, 1 },
         {Era.Future, 3 }
     };
 
@@ -52,7 +52,7 @@ public static class LevelManager
     /// </summary>
     public static void NextLevel()
     {
-        //populate scenarios array
+        //populate scenarios array the first time
         if (uncompletedScenarios == null)
         {
             uncompletedScenarios = new List<Scenario>();
@@ -61,10 +61,7 @@ public static class LevelManager
             {
                 //TODO: avoid two of same era in a row
                 uncompletedScenarios.Add((Scenario)i);
-
-                Debug.Log(((Scenario)i).ToString());
             }
-
         }
 
         Scenario nextLevel = uncompletedScenarios.Last();
@@ -78,7 +75,7 @@ public static class LevelManager
             .SpawnPointsList[scenarioData.Item2]
             .position;
 
-        //find corresponding era scene
+        //load corresponding era scene
         SceneManager.LoadScene(eraSceneIDs[scenarioData.Item1]);
     }
 }
