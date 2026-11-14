@@ -42,6 +42,8 @@ public static class LevelManager
 
     private static Vector3 spawnLocation;
 
+    private static Scenario currentLevel;
+
     /// <summary>
     /// Which location to spawn the player at when the scene loads
     /// </summary>
@@ -62,20 +64,31 @@ public static class LevelManager
                 //TODO: avoid two of same era in a row
                 uncompletedScenarios.Add((Scenario)i);
             }
+
+            //subscribe to events
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-        Scenario nextLevel = uncompletedScenarios.Last();
+        currentLevel = uncompletedScenarios.Last();
         uncompletedScenarios.RemoveAt(uncompletedScenarios.Count - 1);
 
-        Tuple<Era, int> scenarioData = scenarioIDs[nextLevel];
+        Tuple<Era, int> scenarioData = scenarioIDs[currentLevel];
+
+        //load corresponding era scene
+        SceneManager.LoadScene(eraSceneIDs[scenarioData.Item1]);
+    }
+
+    public static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Tuple<Era, int> scenarioData = scenarioIDs[currentLevel];
+
+        SpawnPoints temp = GameObject.FindWithTag("SpawnPoints").GetComponent<SpawnPoints>();
+        Debug.Log(temp);
 
         //find correct spawn position
         spawnLocation = GameObject.FindWithTag("SpawnPoints")
             .GetComponent<SpawnPoints>()
             .SpawnPointsList[scenarioData.Item2]
             .position;
-
-        //load corresponding era scene
-        SceneManager.LoadScene(eraSceneIDs[scenarioData.Item1]);
     }
 }

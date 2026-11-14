@@ -8,9 +8,10 @@ public class SpawnPoints : MonoBehaviour
 
     public List<Transform> SpawnPointsList => spawnPoints;
 
-    void Start()
+    void Awake()
     {
         spawnPoints = GetComponentsInChildren<Transform>().ToList();
+        spawnPoints.Remove(transform);
         Debug.Log(spawnPoints.Count);
     }
 
