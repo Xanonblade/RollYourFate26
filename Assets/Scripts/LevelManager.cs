@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -58,19 +59,25 @@ public static class LevelManager
         if (uncompletedScenarios == null)
         {
             uncompletedScenarios = new List<Scenario>();
+            List<Scenario> scenarioFullList = Enum.GetValues(typeof(Scenario)).Cast<Scenario>().ToList();
 
-            for (int i = 0; i < Enum.GetValues(typeof(Scenario)).Length; i++)
+            uncompletedScenarios.Add(Scenario.Train);
+            scenarioFullList.Remove(Scenario.Train);
+
+            while (scenarioFullList.Count > 0)
             {
-                //TODO: avoid two of same era in a row
-                uncompletedScenarios.Add((Scenario)i);
+                int index = (int)Math.Floor(UnityEngine.Random.value * scenarioFullList.Count);
+
+                uncompletedScenarios.Add(scenarioFullList[index]);
+                scenarioFullList.RemoveAt(index);
             }
 
             //subscribe to events
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-        currentLevel = uncompletedScenarios.Last();
-        uncompletedScenarios.RemoveAt(uncompletedScenarios.Count - 1);
+        currentLevel = uncompletedScenarios.First();
+        uncompletedScenarios.RemoveAt(0);
 
         Tuple<Era, int> scenarioData = scenarioIDs[currentLevel];
 
