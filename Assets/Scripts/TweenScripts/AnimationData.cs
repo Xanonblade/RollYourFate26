@@ -23,9 +23,7 @@ public class AnimationData : MonoBehaviour
     /// Adds this animation to the animation manager
     /// </summary>
     private void Start()
-    {
-        AnimationManager.Instance.AddAnimation(this);
-    }
+    {AnimationManager.Instance.AddAnimation(this);}
 
     /// <summary>
     /// Starts playing the animation

@@ -2,7 +2,8 @@ using UnityEngine;
 
 public enum EventType
 {
-    ANIMATION
+    ANIMATION,
+    END_GAME
 }
 
 [CreateAssetMenu(fileName = "TimedEvent")]

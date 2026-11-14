@@ -8,7 +8,13 @@ public class AnimationManager : MonoBehaviour
 {
     public static AnimationManager Instance;
 
-    [SerializeField] private Dictionary<string, AnimationData> animationObjects = new Dictionary<string, AnimationData>();
+    [SerializeField]
+    private Dictionary<string, AnimationData> animationObjects =
+        new Dictionary<string, AnimationData>();
+
+    [SerializeField]
+    private Dictionary<string, AnimationController> animationControllers =
+        new Dictionary<string, AnimationController>();
 
     private void Awake()
     {
@@ -20,12 +26,26 @@ public class AnimationManager : MonoBehaviour
         animationObjects.Add(anim.Name, anim);
     }
 
+    public void AddAnimation(AnimationController animController)
+    {
+        animationControllers.Add(animController.Name, animController);
+    }
+
     public bool TriggerAnimation(string animationKey)
     {
-        Debug.Log(animationObjects.Count);
         if (animationObjects.ContainsKey(animationKey))
         {
             animationObjects[animationKey].StartAnimation();
+            return true;
+        }
+        return false;
+    }
+
+    public bool TriggerAnimation(string animationKey, Spells spell)
+    {
+        if (animationControllers.ContainsKey(animationKey))
+        {
+            animationControllers[animationKey].StartAnimation(spell);
             return true;
         }
         return false;
