@@ -39,6 +39,14 @@ public static class LevelManager
         {Era.Future, 3 }
     };
 
+    private static Dictionary<Scenario, Tuple<float, float>> playerMinMaxPitch = new Dictionary<Scenario, Tuple<float, float>>() {
+        { Scenario.Train, new Tuple<float, float>(-65f, 60f) }
+    };
+
+    private static Dictionary<Scenario, Tuple<float, float>> playerMinMaxYaw = new Dictionary<Scenario, Tuple<float, float>>() {
+        { Scenario.Train, new Tuple<float, float>(-80f, 80f) }
+    };
+
     private static List<Scenario> uncompletedScenarios;
 
     private static Transform spawnTransform;
@@ -54,6 +62,26 @@ public static class LevelManager
     /// The rotation to give the player when the scene loads
     /// </summary>
     public static Quaternion SpawnRotation => spawnTransform.rotation;
+
+    /// <summary>
+    /// The minimum pitch for the players head movement this scenario
+    /// </summary>
+    public static float GetMinPitch { get { return playerMinMaxPitch[CurrentScenario].Item1; } }
+
+    /// <summary>
+    /// The maximum pitch for the players head movement this scenario
+    /// </summary>
+    public static float GetMaxPitch { get { return playerMinMaxPitch[CurrentScenario].Item2; } }
+
+    /// <summary>
+    /// The minimum yaw for the players head movement this scenario
+    /// </summary>
+    public static float GetMinYaw { get { return playerMinMaxYaw[CurrentScenario].Item1; } }
+
+    /// <summary>
+    /// The maximum yaw for the players head movement this scenario
+    /// </summary>
+    public static float GetMaxYaw { get { return playerMinMaxYaw[CurrentScenario].Item2; } }
 
     /// <summary>
     /// The current scenario loaded
