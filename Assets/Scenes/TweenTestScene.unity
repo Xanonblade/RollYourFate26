@@ -344,9 +344,9 @@ MonoBehaviour:
   - 2
   - 8
   - 1
-  nameID: Test
+  nameID: Burn
   incomingFlag: 0
-  outgoingFlag: 0
+  outgoingFlag: 1
 --- !u!1 &730707928
 GameObject:
   m_ObjectHideFlags: 0
