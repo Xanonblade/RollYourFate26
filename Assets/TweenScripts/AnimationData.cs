@@ -14,6 +14,9 @@ public class AnimationData : MonoBehaviour
     private int moveIndex;
     private int rotateIndex;
 
+    [SerializeField] private int incomingFlag;
+    [SerializeField] private int outgoingFlag;
+
     public string Name { get { return nameID; } }
 
     /// <summary>

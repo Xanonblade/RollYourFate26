@@ -107,3 +107,7 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+Assets/Models/decoder_model.onnx
+Assets/Models/decoder_model.onnx.meta
+Assets/Models/decoder_with_past_model.onnx
+Assets/Models/decoder_with_past_model.onnx.meta
