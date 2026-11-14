@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Test_SO
   m_EditorClassIdentifier: Assembly-CSharp::TimedEvent
   setScenario: 0
-  timeToActivate: 10
+  timeToActivate: 5
   eventType: 0
   actionID: Test

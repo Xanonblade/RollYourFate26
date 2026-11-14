@@ -22,7 +22,7 @@ public class TimeManager : MonoBehaviour
         for (int i = 0; i < events.Count;i++)
         {
             // prolly wanna remove if this happens but idk. ill look back later when my brain aint cooked
-            // if (scenario != eve.setScenario) { return; }
+            if (scenario != events[i].setScenario) { return; }
 
             if (clock >= events[i].timeToActivate)
             {
