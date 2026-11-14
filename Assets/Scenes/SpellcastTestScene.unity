@@ -636,6 +636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 792340759}
   - component: {fileID: 792340761}
+  - component: {fileID: 792340762}
   m_Layer: 0
   m_Name: HoverSymbol
   m_TagString: Untagged
@@ -674,6 +675,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HoverSymbol
   burnIcon: {fileID: 2800000, guid: bd6763237dff07f44a4501b7df7a6369, type: 3}
   growIcon: {fileID: 2800000, guid: b88c3ee584fc8974f860c2e7848b6170, type: 3}
+--- !u!114 &792340762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792340758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eabadd0c6a5c6ca46b7efe9c9e27f3f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Billboard
 --- !u!1 &1051854126
 GameObject:
   m_ObjectHideFlags: 0

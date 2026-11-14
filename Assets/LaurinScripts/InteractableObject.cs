@@ -19,6 +19,7 @@ public class InteractableObject : MonoBehaviour
 {
     protected Dictionary<Spells, AnimationData> validSpells;
     private HoverSymbol hoverVisual;
+    private float timer = 0.1f;
     
     /// <summary>
     /// Use this to set conditions on when the action can be performed
@@ -52,7 +53,15 @@ public class InteractableObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timer -= Time.deltaTime;  
+        if (timer <= 0)
+        {
+            hoverVisual.gameObject.SetActive(false);
+        }
+        else
+        {
+            hoverVisual.gameObject.SetActive(true);
+        }
     }
 
     public void CastSpellOnThis(Spells spell)
@@ -72,5 +81,10 @@ public class InteractableObject : MonoBehaviour
                 .Where((x) => x.Value.IncomingFlag == flag)
                 .Select((x) => x.Key)
                 .ToList());
+    }
+
+    public void Hover()
+    {
+        timer = 0.1f;
     }
 }

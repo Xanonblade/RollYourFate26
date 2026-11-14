@@ -6,7 +6,8 @@ public class ItemDetection : MonoBehaviour
     private void Update()
     {
         //TODO: change ray to have vertical rotation
-        Ray fireRay = new Ray(transform.position, transform.forward);
+        Camera current = Camera.main;
+        Ray fireRay = new Ray(current.transform.position, current.transform.forward);
 
         RaycastHit hit;
         if (Physics.Raycast(fireRay, out hit, Mathf.Infinity))
@@ -15,7 +16,7 @@ public class ItemDetection : MonoBehaviour
             {
                 // Call Information
                 Debug.Log("Hit Key Item");
-                hit.collider.GetComponent<InteractableObject>().CastSpellOnThis(Spells.Burn);
+                hit.collider.GetComponent<InteractableObject>().Hover();
             }
         }
     }
