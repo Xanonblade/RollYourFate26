@@ -6,8 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/MainMenu.unity
+    guid: 08452695944be9241af16e4026505131
+  - enabled: 0
+    path: Assets/Scenes/Game.unity
+    guid: e7f5dcbc15b7c324ca20a4bd9944e866
+  - enabled: 1
+    path: Assets/Scenes/EraScenes/Medieval.unity
+    guid: d0a01916d1cbe9c4590d8562560e25ed
+  - enabled: 1
+    path: Assets/Scenes/EraScenes/WildWest.unity
+    guid: 1b2a281496918b84c88a15ac8a80a674
+  - enabled: 1
+    path: Assets/Scenes/EraScenes/Future.unity
+    guid: bf889e2bc00cbf84a9dae13da033774a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
