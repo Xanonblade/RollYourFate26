@@ -5,7 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-enum Scenario
+public enum Scenario
 {
     Train,
     Duel,
