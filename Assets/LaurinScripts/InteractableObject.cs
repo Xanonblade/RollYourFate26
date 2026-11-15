@@ -18,7 +18,7 @@ public enum Spells
 [RequireComponent(typeof(Collider))]
 public class InteractableObject : MonoBehaviour
 {
-    protected Dictionary<Spells, SpellAnimationData> validSpells;
+    protected Dictionary<Spells, ISpellAnimation> validSpells;
     public int ValidSpellsCount { get { return validSpells.Where((x) => x.Value.IncomingFlag == flag).Count(); } }
     private HoverSymbol hoverVisual;
     private bool hovered = false;
@@ -31,8 +31,8 @@ public class InteractableObject : MonoBehaviour
 
     void Start()
     {
-        SpellAnimationData[] anims = GetComponents<SpellAnimationData>();
-        validSpells = new Dictionary<Spells, SpellAnimationData>();
+        ISpellAnimation[] anims = GetComponents<ISpellAnimation>();
+        validSpells = new Dictionary<Spells, ISpellAnimation>();
         mesh = GetComponent<MeshRenderer>();
 
         //populate animations to play

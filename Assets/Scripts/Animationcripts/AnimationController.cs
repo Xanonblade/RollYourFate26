@@ -1,18 +1,18 @@
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    [SerializeField] private AnimationData[] animationData;
+    [SerializeField] private ISpellAnimation[] spellAnimations;
     [SerializeField] private string controllerID;
 
     public string Name { get { return controllerID; } }
 
     private void Awake()
     {
-        if (animationData == null || animationData.Length <= 0) { return; }
-        animationData = GetComponentsInChildren<SpellAnimationData>();
+        if (spellAnimations == null || spellAnimations.Length <= 0) { return; }
+
+        spellAnimations = GetComponentsInChildren<ISpellAnimation>();
     }
 
     private void Start(){
@@ -20,15 +20,10 @@ public class AnimationController : MonoBehaviour
 
     public void StartAnimation(Spells spell)
     {
-        foreach (SpellAnimationData animData in animationData)
+        foreach (var anim in spellAnimations)
         {
-            if (animData.Spell == spell)
-            {
-                animData.StartAnimation();
-                Debug.Log($"{spell.ToString()} as triggered an animation.");
-                return;
-            }
+            if (anim.Spell == spell) { anim.StartAnimation(); return; }
         }
-        throw new System.Exception($"BRUH THIS CONTROLLER DONT EVEN GOT THE SPELL {spell.ToString()}");
+        throw new System.Exception($"Controller {controllerID} has no animation for {spell}");
     }
 }

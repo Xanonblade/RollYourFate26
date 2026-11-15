@@ -9,21 +9,21 @@ using UnityEngine;
 public class AnimationData : MonoBehaviour
 {
     [Header("Animation")]
-    [SerializeField] private GameObject[] targetObjects;
-    [SerializeField] private float[] durations;
-    [SerializeField] private string nameID;
+    [SerializeField] protected GameObject[] targetObjects;
+    [SerializeField] protected float[] durations;
+    [SerializeField] protected string nameID;
 
     [Header("Actions")]
-    [SerializeField] private string postActionID;
-    [SerializeField] private string parallelActionID;
+    [SerializeField] protected string postActionID;
+    [SerializeField] protected string parallelActionID;
 
-    private int moveIndex;
-    private bool moveFinished;
-    private int rotateIndex;
-    private bool rotateFinished;
+    protected int moveIndex;
+    protected bool moveFinished;
+    protected int rotateIndex;
+    protected bool rotateFinished;
 
-    private Action parallelAction;
-    private Action onCompleteAction;
+    protected Action parallelAction;
+    protected Action onCompleteAction;
 
     [SerializeField] public readonly int IncomingFlag = 0;
     [SerializeField] public readonly int OutgoingFlag = 1;
@@ -33,7 +33,7 @@ public class AnimationData : MonoBehaviour
     /// <summary>
     /// Adds this animation to the animation manager
     /// </summary>
-    private void Start()
+    protected void Start()
     {
         AnimationManager.Instance.AddAnimation(this);
         
@@ -60,7 +60,7 @@ public class AnimationData : MonoBehaviour
     /// Starts playing the animation with given function invoked on completion
     /// </summary>
     /// <param name="onComplete">The function to play on complete</param>
-    public void StartAnimation(Action onComplete, Action parallelAction)
+    public virtual void StartAnimation(Action onComplete, Action parallelAction)
     {
         Debug.Log($"Animation {nameID} has Started");
         // This couldl be a bug starter
@@ -111,7 +111,7 @@ public class AnimationData : MonoBehaviour
     /// <summary>
     /// Starts the next movement of the animation
     /// </summary>
-    private void ContinueMoveAnimation()
+    protected void ContinueMoveAnimation()
     {
         moveIndex++;
         if (moveIndex >= targetObjects.Length)
@@ -126,7 +126,7 @@ public class AnimationData : MonoBehaviour
     /// <summary>
     /// Starts the next rotation of the animation
     /// </summary>
-    private void ContinueRotateAnimation()
+    protected void ContinueRotateAnimation()
     {
         rotateIndex++;
         if (rotateIndex >= targetObjects.Length)
@@ -141,7 +141,7 @@ public class AnimationData : MonoBehaviour
     /// <summary>
     /// Trys to complete the onComplete action
     /// </summary>
-    private void TryFinish()
+    protected virtual void TryFinish()
     {
         if (!moveFinished || !rotateFinished) return;
 
@@ -156,23 +156,23 @@ public class AnimationData : MonoBehaviour
     /// Gets the duration for the current movement
     /// </summary>
     /// <returns>The current duration for movement</returns>
-    private float MoveDuration() { return durations[moveIndex]; }
+    protected float MoveDuration() { return durations[moveIndex]; }
 
     /// <summary>
     /// Gets the duration for the current duration
     /// </summary>
     /// <returns>The current duration for rotation</returns>
-    private float RotateDuration() { return durations[rotateIndex]; }
+    protected float RotateDuration() { return durations[rotateIndex]; }
 
     /// <summary>
     /// Gets the position of the current target object
     /// </summary>
     /// <returns>The position of the current target object</returns>
-    private Vector3 Position() { return targetObjects[moveIndex].transform.position; }
+    protected Vector3 Position() { return targetObjects[moveIndex].transform.position; }
 
     /// <summary>
     /// Gets the euler rotation of the current target object
     /// </summary>
     /// <returns>The euler rotation of the current target object</returns>
-    private Vector3 Rotation() { return targetObjects[rotateIndex].transform.rotation.eulerAngles; }
+    protected Vector3 Rotation() { return targetObjects[rotateIndex].transform.rotation.eulerAngles; }
 }
