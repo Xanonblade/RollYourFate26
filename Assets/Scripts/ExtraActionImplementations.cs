@@ -36,6 +36,7 @@ public static class ExtraActionImplementations
         {"rope_fire", () =>
         {
             AnimationManager.TriggerAnimation("rope_fire");
+            
         } },
 
         {"death.1", () =>

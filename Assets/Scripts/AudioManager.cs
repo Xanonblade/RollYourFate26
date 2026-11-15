@@ -12,4 +12,13 @@ public class AudioManager : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
     }
+
+    /// <summary>
+    /// Play the audio sources in the game manager
+    /// </summary>
+    public void PlayFireSpell()
+    {
+        this.gameObject.transform.GetChild(0).GetComponent<AudioSource>().Play();
+        this.gameObject.transform.GetChild(1).GetComponent<AudioSource>().Play();
+    }
 }
