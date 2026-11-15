@@ -18,9 +18,11 @@ public enum Spells
 [RequireComponent(typeof(Collider))]
 public class InteractableObject : MonoBehaviour
 {
-    protected Dictionary<Spells, AnimationData> validSpells;
+    protected Dictionary<Spells, SpellAnimationData> validSpells;
+    public int ValidSpellsCount { get { return validSpells.Where((x) => x.Value.IncomingFlag == flag).Count(); } }
     private HoverSymbol hoverVisual;
     private bool hovered = false;
+    private MeshRenderer mesh;
     
     /// <summary>
     /// Use this to set conditions on when the action can be performed
@@ -29,13 +31,14 @@ public class InteractableObject : MonoBehaviour
 
     void Start()
     {
-        AnimationData[] anims = GetComponents<AnimationData>();
-        validSpells = new Dictionary<Spells, AnimationData>();
+        SpellAnimationData[] anims = GetComponents<SpellAnimationData>();
+        validSpells = new Dictionary<Spells, SpellAnimationData>();
+        mesh = GetComponent<MeshRenderer>();
 
         //populate animations to play
         for (int i = 0; i < anims.Length; i++)
         {
-            validSpells.Add((Spells)Enum.Parse(typeof(Spells), anims[i].Name), anims[i]);
+            validSpells.Add(anims[i].Spell, anims[i]);
         }
 
         hoverVisual = GetComponentInChildren<HoverSymbol>();
@@ -57,12 +60,14 @@ public class InteractableObject : MonoBehaviour
         if (!hovered)
         {
             hoverVisual.gameObject.SetActive(false);
-            GetComponent<MeshRenderer>().materials[1].color = Color.black;
+            if (mesh.materials.Length > 1)
+                mesh.materials[1].color = Color.black;
         }
         else
         {
             hoverVisual.gameObject.SetActive(true);
-            GetComponent<MeshRenderer>().materials[1].color = Color.yellow;
+            if (mesh.materials.Length > 1)
+                mesh.materials[1].color = Color.yellow;
         }
     }
 

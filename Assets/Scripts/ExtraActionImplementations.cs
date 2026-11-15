@@ -21,12 +21,21 @@ public static class ExtraActionImplementations
         {
             Debug.Log("Here the level ends");
         }
+        },
+
+        {"player_grow", () => {
+            AnimationManager.Instance.TriggerAnimation("player_grow");
+        }
         }
     };
 
     public static Action GetAction(string key)
     {
         if (actionDictionary.TryGetValue(key, out var action)) return action;
+        if (AnimationManager.Instance.HasAnimation(key))
+        {
+            return () => { AnimationManager.Instance.TriggerAnimation(key); };
+        }
         Debug.LogError($"No extra action registered for '{key}'");
         return () => { };
     }

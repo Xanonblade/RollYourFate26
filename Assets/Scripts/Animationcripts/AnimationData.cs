@@ -12,13 +12,17 @@ public class AnimationData : MonoBehaviour
     [SerializeField] private GameObject[] targetObjects;
     [SerializeField] private float[] durations;
     [SerializeField] private string nameID;
+
+    [Header("Actions")]
     [SerializeField] private string postActionID;
+    [SerializeField] private string parallelActionID;
 
     private int moveIndex;
     private bool moveFinished;
     private int rotateIndex;
     private bool rotateFinished;
 
+    private Action parallelAction;
     private Action onCompleteAction;
 
     [SerializeField] public readonly int IncomingFlag = 0;
@@ -38,6 +42,10 @@ public class AnimationData : MonoBehaviour
         {
             onCompleteAction = ExtraActionImplementations.GetAction(postActionID);
         }
+        if (parallelActionID != null && parallelActionID.Count() > 0)
+        {
+            parallelAction = ExtraActionImplementations.GetAction(parallelActionID);
+        }
     }
 
     /// <summary>
@@ -45,21 +53,38 @@ public class AnimationData : MonoBehaviour
     /// </summary>
     public void StartAnimation()
     {
-        StartAnimation(null);
+        StartAnimation(onCompleteAction, parallelAction);
     }
 
     /// <summary>
     /// Starts playing the animation with given function invoked on completion
     /// </summary>
     /// <param name="onComplete">The function to play on complete</param>
-    public void StartAnimation(Action onComplete)
+    public void StartAnimation(Action onComplete, Action parallelAction)
     {
+        Debug.Log($"Animation {nameID} has Started");
         // This couldl be a bug starter
         transform.DOKill();
 
         if (this.onCompleteAction == null)
         {
+            Debug.Log($"Adding on Complete {postActionID}");
             onCompleteAction = onComplete;
+        }
+
+        if (parallelActionID != null && parallelActionID.Count() > 0)
+        {
+            Debug.Log($"Invoking Parallel Action {parallelActionID}");
+            ExtraActionImplementations.GetAction(parallelActionID).Invoke();
+        }
+        else if (this.parallelAction != null)
+        {
+            Debug.Log($"Invoking Parallel Action {parallelActionID}");
+            this.parallelAction.Invoke();
+        } else if (parallelAction != null)
+        {
+            Debug.Log($"Invoking Parallel Action {parallelActionID}");
+            parallelAction.Invoke();
         }
 
         moveIndex = 0;
@@ -68,10 +93,19 @@ public class AnimationData : MonoBehaviour
         moveFinished = false;
         rotateFinished = false;
 
+        if (targetObjects.Length == 0)
+        {
+            moveFinished = true;
+            rotateFinished = true;
+            
+            TryFinish();
+            return;
+        }
+
         transform.DOMove(Position(), MoveDuration())
-            .OnComplete(ContinueMoveAnimation);
+        .OnComplete(ContinueMoveAnimation);
         transform.DORotate(Rotation(), RotateDuration())
-            .OnComplete(ContinueRotateAnimation);
+        .OnComplete(ContinueRotateAnimation);
     }
 
     /// <summary>
@@ -111,7 +145,9 @@ public class AnimationData : MonoBehaviour
     {
         if (!moveFinished || !rotateFinished) return;
 
-        var cb = onCompleteAction;
+        Debug.Log($"Try Finishing {nameID} Animation");
+
+        Action cb = onCompleteAction;
         onCompleteAction = null;
         cb?.Invoke();
     }
