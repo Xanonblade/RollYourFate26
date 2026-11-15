@@ -50,6 +50,9 @@ public static class ExtraActionImplementations
 
         {"death.2", () =>
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
             SceneManager.LoadScene("MainMenu");
         } },
 
