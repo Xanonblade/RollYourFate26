@@ -34,7 +34,7 @@ public class TimedEventsManager : MonoBehaviour
                 switch (events[i].eventType)
                 {
                     case EventType.ANIMATION:
-                        AnimationManager.Instance.TriggerAnimation(events[i].actionID);
+                        AnimationManager.TriggerAnimation(events[i].actionID);
                         break;
 
                     case EventType.ACTION:
@@ -48,7 +48,7 @@ public class TimedEventsManager : MonoBehaviour
                     case EventType.ANIMATION_THEN_ANIMATION:
                         string followUp = events[i].actionID2;
                         AnimationManager.Instance.TriggerAnimation(events[i].actionID,
-                            () => AnimationManager.Instance.TriggerAnimation(followUp));
+                            () => AnimationManager.TriggerAnimation(followUp));
                         break;
 
                     case EventType.ANIMATION_THEN_ACTION:
