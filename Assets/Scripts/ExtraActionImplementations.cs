@@ -14,12 +14,16 @@ public static class ExtraActionImplementations
         // Fired when a level is complete, and sets a timer to actually load the next level.
         {"next_level.1", () =>
         {
+            GameObject player = GameObject.FindWithTag("Player");
+            player.GetComponentInChildren<ParticleSystem>().Play();
+            player.GetComponentInChildren<FadeController>().IncrementFlag();
+            Debug.Log(player.GetComponentInChildren<ParticleSystem>());
             TimedEventsManager.Instance.QueueTimedEvent(5f, "next_level.2");
         } },
         // Loads the next leve;
         {"next_level.2", ()=>
         {
-            Debug.Log("Here the level ends");
+            LevelManager.NextLevel();
         }
         },
 
