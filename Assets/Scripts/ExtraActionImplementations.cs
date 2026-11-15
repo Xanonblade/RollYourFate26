@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class ExtraActionImplementations
 {
@@ -31,6 +32,16 @@ public static class ExtraActionImplementations
         {"rope_fire", () =>
         {
             AnimationManager.TriggerAnimation("rope_fire");
+        } },
+
+        {"death.1", () =>
+        {
+            TimedEventsManager.Instance.QueueTimedEvent(2f, "death.2");
+        } },
+
+        {"death.2", () =>
+        {
+            SceneManager.LoadScene("MainMenu");
         } }
     };
 
