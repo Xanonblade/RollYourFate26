@@ -28,7 +28,7 @@ public static class LevelManager
         { Scenario.Train, new Tuple<Era, int>(Era.WildWest, 0) },
         { Scenario.Duel, new Tuple < Era, int >(Era.WildWest, 1) },
         //{ Scenario.FreeFall, new Tuple < Era, int >(Era.Future, 0) },
-        //{ Scenario.Airlock, new Tuple < Era, int >(Era.Future, 1) },
+        { Scenario.Airlock, new Tuple < Era, int >(Era.Future, 0) },
     };
 
     private static Dictionary<Era, int> eraSceneIDs = new Dictionary<Era, int>() {
@@ -38,11 +38,13 @@ public static class LevelManager
     };
 
     private static Dictionary<Scenario, Tuple<float, float>> playerMinMaxPitch = new Dictionary<Scenario, Tuple<float, float>>() {
-        { Scenario.Train, new Tuple<float, float>(-65f, 60f) }
+        { Scenario.Train, new Tuple<float, float>(-65f, 60f) },
+        { Scenario.Airlock, new Tuple<float, float>(-65f, 60f) },
     };
 
     private static Dictionary<Scenario, Tuple<float, float>> playerMinMaxYaw = new Dictionary<Scenario, Tuple<float, float>>() {
-        { Scenario.Train, new Tuple<float, float>(-80f, 80f) }
+        { Scenario.Train, new Tuple<float, float>(-80f, 80f) },
+        { Scenario.Airlock, new Tuple<float, float>(-8000f, 8000f) },
     };
 
     private static List<Scenario> uncompletedScenarios;
@@ -97,8 +99,8 @@ public static class LevelManager
             uncompletedScenarios = new List<Scenario>();
             List<Scenario> scenarioFullList = Enum.GetValues(typeof(Scenario)).Cast<Scenario>().ToList();
 
-            uncompletedScenarios.Add(Scenario.Train);
-            scenarioFullList.Remove(Scenario.Train);
+            uncompletedScenarios.Add(Scenario.Airlock);
+            scenarioFullList.Remove(Scenario.Airlock);
 
             while (scenarioFullList.Count > 0)
             {
@@ -132,5 +134,11 @@ public static class LevelManager
         spawnTransform = GameObject.FindWithTag("SpawnPoints")
             .GetComponent<SpawnPoints>()
             .SpawnPointsList[scenarioData.Item2];
+    }
+
+    public static void RestartLevel()
+    {
+        //load corresponding era scene
+        SceneManager.LoadScene(eraSceneIDs[scenarioIDs[CurrentScenario].Item1]);
     }
 }

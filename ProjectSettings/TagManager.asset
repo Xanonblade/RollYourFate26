@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SpawnPoints
   - KeyItem
+  - AirlockDoor
   layers:
   - Default
   - TransparentFX

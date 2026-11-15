@@ -45,8 +45,15 @@ public static class ExtraActionImplementations
 
         {"death.2", () =>
         {
-            SceneManager.LoadScene("MainMenu");
-        } }
+            LevelManager.RestartLevel();
+        } },
+        {"keypad.1", () => {
+            AnimationManager.TriggerAnimation("keypad_unlock");
+        } },
+        {"open_doors", () => {
+            foreach (GameObject item in GameObject.FindGameObjectsWithTag("AirlockDoor")) {
+                GameObject.Destroy(item);
+}        } },
     };
 
     public static Action GetAction(string key)

@@ -11,6 +11,9 @@ public class HoverSymbol : MonoBehaviour
 
     [SerializeField] Texture2D burnIcon;
     [SerializeField] Texture2D growIcon;
+    [SerializeField] Texture2D pullIcon;
+    [SerializeField] Texture2D zapIcon;
+    [SerializeField] Texture2D openIcon;
 
     SpriteRenderer[] sprites;
 
