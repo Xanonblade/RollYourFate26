@@ -15,9 +15,7 @@ public class AnimationController : MonoBehaviour
         animationData = GetComponentsInChildren<SpellAnimationData>();
     }
 
-    private void Start()
-    {
-        
+    private void Start(){
     }
 
     public void StartAnimation(Spells spell)
@@ -27,6 +25,7 @@ public class AnimationController : MonoBehaviour
             if (animData.Spell == spell)
             {
                 animData.StartAnimation();
+                Debug.Log($"{spell.ToString()} as triggered an animation.");
                 return;
             }
         }

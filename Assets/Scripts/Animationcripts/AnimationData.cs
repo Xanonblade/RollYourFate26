@@ -53,7 +53,7 @@ public class AnimationData : MonoBehaviour
     /// </summary>
     public void StartAnimation()
     {
-        StartAnimation(null, null);
+        StartAnimation(onCompleteAction, parallelAction);
     }
 
     /// <summary>
@@ -62,15 +62,28 @@ public class AnimationData : MonoBehaviour
     /// <param name="onComplete">The function to play on complete</param>
     public void StartAnimation(Action onComplete, Action parallelAction)
     {
+        Debug.Log($"Animation {nameID} has Started");
         // This couldl be a bug starter
         transform.DOKill();
 
         if (this.onCompleteAction == null)
         {
+            Debug.Log($"Adding on Complete {postActionID}");
             onCompleteAction = onComplete;
         }
-        if (parallelAction != null)
+
+        if (parallelActionID != null && parallelActionID.Count() > 0)
         {
+            Debug.Log($"Invoking Parallel Action {parallelActionID}");
+            ExtraActionImplementations.GetAction(parallelActionID).Invoke();
+        }
+        else if (this.parallelAction != null)
+        {
+            Debug.Log($"Invoking Parallel Action {parallelActionID}");
+            this.parallelAction.Invoke();
+        } else if (parallelAction != null)
+        {
+            Debug.Log($"Invoking Parallel Action {parallelActionID}");
             parallelAction.Invoke();
         }
 
@@ -80,10 +93,19 @@ public class AnimationData : MonoBehaviour
         moveFinished = false;
         rotateFinished = false;
 
+        if (targetObjects.Length == 0)
+        {
+            moveFinished = true;
+            rotateFinished = true;
+            
+            TryFinish();
+            return;
+        }
+
         transform.DOMove(Position(), MoveDuration())
-            .OnComplete(ContinueMoveAnimation);
+        .OnComplete(ContinueMoveAnimation);
         transform.DORotate(Rotation(), RotateDuration())
-            .OnComplete(ContinueRotateAnimation);
+        .OnComplete(ContinueRotateAnimation);
     }
 
     /// <summary>
@@ -123,7 +145,9 @@ public class AnimationData : MonoBehaviour
     {
         if (!moveFinished || !rotateFinished) return;
 
-        var cb = onCompleteAction;
+        Debug.Log($"Try Finishing {nameID} Animation");
+
+        Action cb = onCompleteAction;
         onCompleteAction = null;
         cb?.Invoke();
     }

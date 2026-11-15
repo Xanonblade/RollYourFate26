@@ -18,9 +18,11 @@ public class ItemDetection : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(fireRay, out hit, Mathf.Infinity))
         {
-            if (hit.collider.gameObject.CompareTag("KeyItem"))
+            if (hit.collider.gameObject.CompareTag("KeyItem") && hit.collider.GetComponent<InteractableObject>().ValidSpellsCount > 0)
             {
-                
+                Time.timeScale = Mathf.Lerp(Time.timeScale, 1/12f, 0.01f);
+                Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 50, 0.01f);
+
                 if (prevHit != hit.collider)
                 {
                     // Call Information
@@ -29,29 +31,30 @@ public class ItemDetection : MonoBehaviour
                     prevHit?.GetComponent<InteractableObject>().ToggleHover();
                     hit.collider.GetComponent<InteractableObject>().ToggleHover();
                 }
-
-                if (timer > allowedCheckFrequency)
+                    
+                //Check if spell is correct in WhisperProcess
+                if (gameObject.GetComponent<WhisperProcess>().MatchSpell(out Spells finalSpell))
                 {
-                    timer = 0;
-                    
-                    //Check if spell is correct in WhisperProcess
-                    if (gameObject.GetComponent<WhisperProcess>().MatchSpell(out Spells finalSpell))
-                    {
-                        hit.collider.GetComponent<InteractableObject>().CastSpellOnThis(finalSpell);
-                    }
-                    
+                    hit.collider.GetComponent<InteractableObject>().CastSpellOnThis(finalSpell);
                 }
+                    
 
                 prevHit = hit.collider;
             }
             else
             {
+                Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, 0.03f);
+                Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60, 0.01f);
+
                 prevHit?.GetComponent<InteractableObject>().ToggleHover();
                 prevHit = null;
             }
         }
         else
         {
+            Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, 0.03f);
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60, 0.01f);
+
             prevHit?.GetComponent<InteractableObject>().ToggleHover();
             prevHit = null;
         }
