@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class TimedEventsManager : MonoBehaviour
@@ -32,19 +34,23 @@ public class TimedEventsManager : MonoBehaviour
                 switch (events[i].eventType)
                 {
                     case EventType.ANIMATION:
-                        Debug.Log("Ani");
                         AnimationManager.Instance.TriggerAnimation(events[i].actionID);
                         break;
+
+                    case EventType.ACTION:
+                        ExtraActionImplementations.GetAction(events[i].actionID).Invoke();
+                        break;
+
                     case EventType.END_GAME:
-                        Debug.Log("End Game");
                         GameOver();
                         break;
+
                     case EventType.ANIMATION_THEN_ANIMATION:
-                        Debug.Log("Ani then Ani");
                         string followUp = events[i].actionID2;
                         AnimationManager.Instance.TriggerAnimation(events[i].actionID,
                             () => AnimationManager.Instance.TriggerAnimation(followUp));
                         break;
+
                     case EventType.ANIMATION_THEN_ACTION:
                         followUp = events[i].actionID2;
                         AnimationManager.Instance.TriggerAnimation(events[i].actionID,
@@ -56,6 +62,16 @@ public class TimedEventsManager : MonoBehaviour
                 i--;
             }
         }
+    }
+
+    public void QueueTimedEvent(float duration, string actionID)
+    {
+        TimedEvent te = ScriptableObject.CreateInstance<TimedEvent>();
+        te.setScenario = scenario;
+        te.timeToActivate = duration + clock;
+        te.eventType = EventType.ACTION;
+        te.actionID = actionID;
+        events.Add(te);
     }
 
     private void GameOver()

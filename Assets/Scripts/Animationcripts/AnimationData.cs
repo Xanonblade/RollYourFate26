@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -11,6 +12,7 @@ public class AnimationData : MonoBehaviour
     [SerializeField] private GameObject[] targetObjects;
     [SerializeField] private float[] durations;
     [SerializeField] private string nameID;
+    [SerializeField] private string postActionID;
 
     private int moveIndex;
     private bool moveFinished;
@@ -28,7 +30,15 @@ public class AnimationData : MonoBehaviour
     /// Adds this animation to the animation manager
     /// </summary>
     private void Start()
-    {AnimationManager.Instance.AddAnimation(this);}
+    {
+        AnimationManager.Instance.AddAnimation(this);
+        
+        // If there is an id for a action, add it.
+        if (postActionID != null && postActionID.Count() > 0)
+        {
+            onCompleteAction = ExtraActionImplementations.GetAction(postActionID);
+        }
+    }
 
     /// <summary>
     /// Starts playing the animation
@@ -47,7 +57,10 @@ public class AnimationData : MonoBehaviour
         // This couldl be a bug starter
         transform.DOKill();
 
-        onCompleteAction = onComplete;
+        if (this.onCompleteAction == null)
+        {
+            onCompleteAction = onComplete;
+        }
 
         moveIndex = 0;
         rotateIndex = 0;
@@ -60,18 +73,6 @@ public class AnimationData : MonoBehaviour
         transform.DORotate(Rotation(), RotateDuration())
             .OnComplete(ContinueRotateAnimation);
     }
-
-    /**
-    /// <summary>
-    /// Starts playing the animation with a on complete action
-    /// </summary>
-    public void StartAnimation(Action action)
-    {
-        onCompleteAction = action;
-
-        StartAnimation();
-    }
-    **/
 
     /// <summary>
     /// Starts the next movement of the animation

@@ -315,7 +315,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimedEventsManager
   events:
-  - {fileID: 11400000, guid: 78900809b8759f24980eaf95d4c79d90, type: 2}
   - {fileID: 11400000, guid: d4c8c55b7be113c4289b236656c3dc71, type: 2}
   scenario: 0
   gameOverPrefab: {fileID: 6333091169389779464, guid: 4d7ba5fcfe9e6a54791dd7d7e807251b, type: 3}
@@ -1170,6 +1169,7 @@ MonoBehaviour:
   durations:
   - 10
   nameID: initial_train_movement
+  postActionID: 
 --- !u!65 &1734091322
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1789,6 +1789,7 @@ MonoBehaviour:
   durations:
   - 3
   nameID: grow
+  postActionID: next_level.1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
