@@ -234,6 +234,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 351a01f1ae116674d99cca4fc28e4015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuScript
+--- !u!82 &358503495 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4338223650162303356, guid: c8d12d017f24c4bb69c44878329fe678, type: 3}
+  m_PrefabInstance: {fileID: 3823273508161531384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &971686681
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +413,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4338223650162303356, guid: c8d12d017f24c4bb69c44878329fe678, type: 3}
+      - m_Target: {fileID: 358503495}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
         m_Mode: 1
