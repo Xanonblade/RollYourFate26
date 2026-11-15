@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Animation data for objects whose animations differ due to what spell they are hit with
 /// </summary>
-public class SpellAnimationData : AnimationData
+public class SpellAnimationData : AnimationData, ISpellAnimation
 {
     [SerializeField] private Spells spell;
 
@@ -12,5 +12,12 @@ public class SpellAnimationData : AnimationData
     /// </summary>
     public Spells Spell { get { return spell; } }
 
+    int ISpellAnimation.IncomingFlag => IncomingFlag;
+
+    int ISpellAnimation.OutgoingFlag => OutgoingFlag;
+
+    void ISpellAnimation.StartAnimation() { StartAnimation(); }
+
     private void Start() {}
+
 }

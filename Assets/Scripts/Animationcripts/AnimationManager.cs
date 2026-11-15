@@ -32,11 +32,11 @@ public class AnimationManager : MonoBehaviour
         animationControllers.Add(animController.Name, animController);
     }
 
-    public bool TriggerAnimation(string animationKey)
+    public static bool TriggerAnimation(string animationKey)
     {
-        if (animationObjects.ContainsKey(animationKey))
+        if (Instance.animationObjects.ContainsKey(animationKey))
         {
-            animationObjects[animationKey].StartAnimation();
+            Instance.animationObjects[animationKey].StartAnimation();
             return true;
         }
         return false;

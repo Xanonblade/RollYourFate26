@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class ExtraActionImplementations
 {
@@ -28,9 +29,24 @@ public static class ExtraActionImplementations
         },
 
         {"player_grow", () => {
-            AnimationManager.Instance.TriggerAnimation("player_grow");
+            AnimationManager.TriggerAnimation("player_grow");
         }
-        }
+        },
+
+        {"rope_fire", () =>
+        {
+            AnimationManager.TriggerAnimation("rope_fire");
+        } },
+
+        {"death.1", () =>
+        {
+            TimedEventsManager.Instance.QueueTimedEvent(2f, "death.2");
+        } },
+
+        {"death.2", () =>
+        {
+            SceneManager.LoadScene("MainMenu");
+        } }
     };
 
     public static Action GetAction(string key)
@@ -38,7 +54,7 @@ public static class ExtraActionImplementations
         if (actionDictionary.TryGetValue(key, out var action)) return action;
         if (AnimationManager.Instance.HasAnimation(key))
         {
-            return () => { AnimationManager.Instance.TriggerAnimation(key); };
+            return () => { AnimationManager.TriggerAnimation(key); };
         }
         Debug.LogError($"No extra action registered for '{key}'");
         return () => { };
