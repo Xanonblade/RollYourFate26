@@ -18,6 +18,8 @@ public enum Spells
 public class InteractableObject : MonoBehaviour
 {
     protected Dictionary<Spells, AnimationData> validSpells;
+    private HoverSymbol hoverVisual;
+    private float timer = 0.1f;
     
     /// <summary>
     /// Use this to set conditions on when the action can be performed
@@ -35,12 +37,31 @@ public class InteractableObject : MonoBehaviour
             validSpells.Add((Spells)Enum.Parse(typeof(Spells), anims[i].Name), anims[i]);
         }
 
+        hoverVisual = GetComponentInChildren<HoverSymbol>();
+        if (hoverVisual == null)
+        {
+            throw new Exception("No hover!!");
+        }
+
+        hoverVisual.UpdateTexture(
+            validSpells
+                .Where((x) => x.Value.IncomingFlag == flag)
+                .Select((x) => x.Key)
+                .ToList());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        timer -= Time.deltaTime;  
+        if (timer <= 0)
+        {
+            hoverVisual.gameObject.SetActive(false);
+        }
+        else
+        {
+            hoverVisual.gameObject.SetActive(true);
+        }
     }
 
     public void CastSpellOnThis(Spells spell)
@@ -54,6 +75,16 @@ public class InteractableObject : MonoBehaviour
             }
             
         }
-        
+
+        hoverVisual.UpdateTexture(
+            validSpells
+                .Where((x) => x.Value.IncomingFlag == flag)
+                .Select((x) => x.Key)
+                .ToList());
+    }
+
+    public void Hover()
+    {
+        timer = 0.1f;
     }
 }

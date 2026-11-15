@@ -2,7 +2,10 @@ using UnityEngine;
 
 public enum EventType
 {
-    ANIMATION
+    ANIMATION,
+    END_GAME,
+    ANIMATION_THEN_ANIMATION,
+    ANIMATION_THEN_ACTION
 }
 
 [CreateAssetMenu(fileName = "TimedEvent")]
@@ -12,4 +15,5 @@ public class TimedEvent : ScriptableObject
     public float timeToActivate;
     public EventType eventType;
     public string actionID;
+    public string actionID2;
 }
