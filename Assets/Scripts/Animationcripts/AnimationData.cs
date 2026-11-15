@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -8,16 +9,21 @@ using UnityEngine;
 public class AnimationData : MonoBehaviour
 {
     [Header("Animation")]
-    [SerializeField] private GameObject[] targetObjects;
-    [SerializeField] private float[] durations;
-    [SerializeField] private string nameID;
+    [SerializeField] protected GameObject[] targetObjects;
+    [SerializeField] protected float[] durations;
+    [SerializeField] protected string nameID;
 
-    private int moveIndex;
-    private bool moveFinished;
-    private int rotateIndex;
-    private bool rotateFinished;
+    [Header("Actions")]
+    [SerializeField] protected string postActionID;
+    [SerializeField] protected string parallelActionID;
 
-    private Action onCompleteAction;
+    protected int moveIndex;
+    protected bool moveFinished;
+    protected int rotateIndex;
+    protected bool rotateFinished;
+
+    protected Action parallelAction;
+    protected Action onCompleteAction;
 
     [SerializeField] public readonly int IncomingFlag = 0;
     [SerializeField] public readonly int OutgoingFlag = 1;
@@ -27,27 +33,63 @@ public class AnimationData : MonoBehaviour
     /// <summary>
     /// Adds this animation to the animation manager
     /// </summary>
-    private void Start()
-    {AnimationManager.Instance.AddAnimation(this);}
+    protected void Start()
+    {
+        AnimationManager.Instance.AddAnimation(this);
+        
+        // If there is an id for a action, add it.
+        if (postActionID != null && postActionID.Count() > 0)
+        {
+            onCompleteAction = ExtraActionImplementations.GetAction(postActionID);
+        }
+        if (parallelActionID != null && parallelActionID.Count() > 0)
+        {
+            parallelAction = ExtraActionImplementations.GetAction(parallelActionID);
+        }
+    }
+    protected virtual void OnDestroy()
+    {
+        transform.DOKill();
+    }
 
     /// <summary>
     /// Starts playing the animation
     /// </summary>
     public void StartAnimation()
     {
-        StartAnimation(null);
+        StartAnimation(onCompleteAction, parallelAction);
     }
 
     /// <summary>
     /// Starts playing the animation with given function invoked on completion
     /// </summary>
     /// <param name="onComplete">The function to play on complete</param>
-    public void StartAnimation(Action onComplete)
+    public virtual void StartAnimation(Action onComplete, Action parallelAction)
     {
+        Debug.Log($"Animation {nameID} has Started");
         // This couldl be a bug starter
         transform.DOKill();
 
-        onCompleteAction = onComplete;
+        if (this.onCompleteAction == null)
+        {
+            Debug.Log($"Adding on Complete {postActionID}");
+            onCompleteAction = onComplete;
+        }
+
+        if (parallelActionID != null && parallelActionID.Count() > 0)
+        {
+            Debug.Log($"Invoking Parallel Action {parallelActionID}");
+            ExtraActionImplementations.GetAction(parallelActionID).Invoke();
+        }
+        else if (this.parallelAction != null)
+        {
+            Debug.Log($"Invoking Parallel Action {parallelActionID}");
+            this.parallelAction.Invoke();
+        } else if (parallelAction != null)
+        {
+            Debug.Log($"Invoking Parallel Action {parallelActionID}");
+            parallelAction.Invoke();
+        }
 
         moveIndex = 0;
         rotateIndex = 0;
@@ -55,28 +97,25 @@ public class AnimationData : MonoBehaviour
         moveFinished = false;
         rotateFinished = false;
 
+        if (targetObjects.Length == 0)
+        {
+            moveFinished = true;
+            rotateFinished = true;
+            
+            TryFinish();
+            return;
+        }
+
         transform.DOMove(Position(), MoveDuration())
-            .OnComplete(ContinueMoveAnimation);
+        .OnComplete(ContinueMoveAnimation);
         transform.DORotate(Rotation(), RotateDuration())
-            .OnComplete(ContinueRotateAnimation);
+        .OnComplete(ContinueRotateAnimation);
     }
-
-    /**
-    /// <summary>
-    /// Starts playing the animation with a on complete action
-    /// </summary>
-    public void StartAnimation(Action action)
-    {
-        onCompleteAction = action;
-
-        StartAnimation();
-    }
-    **/
 
     /// <summary>
     /// Starts the next movement of the animation
     /// </summary>
-    private void ContinueMoveAnimation()
+    protected void ContinueMoveAnimation()
     {
         moveIndex++;
         if (moveIndex >= targetObjects.Length)
@@ -91,7 +130,7 @@ public class AnimationData : MonoBehaviour
     /// <summary>
     /// Starts the next rotation of the animation
     /// </summary>
-    private void ContinueRotateAnimation()
+    protected void ContinueRotateAnimation()
     {
         rotateIndex++;
         if (rotateIndex >= targetObjects.Length)
@@ -106,11 +145,13 @@ public class AnimationData : MonoBehaviour
     /// <summary>
     /// Trys to complete the onComplete action
     /// </summary>
-    private void TryFinish()
+    protected virtual void TryFinish()
     {
         if (!moveFinished || !rotateFinished) return;
 
-        var cb = onCompleteAction;
+        Debug.Log($"Try Finishing {nameID} Animation");
+
+        Action cb = onCompleteAction;
         onCompleteAction = null;
         cb?.Invoke();
     }
@@ -119,23 +160,23 @@ public class AnimationData : MonoBehaviour
     /// Gets the duration for the current movement
     /// </summary>
     /// <returns>The current duration for movement</returns>
-    private float MoveDuration() { return durations[moveIndex]; }
+    protected float MoveDuration() { return durations[moveIndex]; }
 
     /// <summary>
     /// Gets the duration for the current duration
     /// </summary>
     /// <returns>The current duration for rotation</returns>
-    private float RotateDuration() { return durations[rotateIndex]; }
+    protected float RotateDuration() { return durations[rotateIndex]; }
 
     /// <summary>
     /// Gets the position of the current target object
     /// </summary>
     /// <returns>The position of the current target object</returns>
-    private Vector3 Position() { return targetObjects[moveIndex].transform.position; }
+    protected Vector3 Position() { return targetObjects[moveIndex].transform.position; }
 
     /// <summary>
     /// Gets the euler rotation of the current target object
     /// </summary>
     /// <returns>The euler rotation of the current target object</returns>
-    private Vector3 Rotation() { return targetObjects[rotateIndex].transform.rotation.eulerAngles; }
+    protected Vector3 Rotation() { return targetObjects[rotateIndex].transform.rotation.eulerAngles; }
 }

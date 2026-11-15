@@ -32,11 +32,11 @@ public class AnimationManager : MonoBehaviour
         animationControllers.Add(animController.Name, animController);
     }
 
-    public bool TriggerAnimation(string animationKey)
+    public static bool TriggerAnimation(string animationKey)
     {
-        if (animationObjects.ContainsKey(animationKey))
+        if (Instance.animationObjects.ContainsKey(animationKey))
         {
-            animationObjects[animationKey].StartAnimation();
+            Instance.animationObjects[animationKey].StartAnimation();
             return true;
         }
         return false;
@@ -46,7 +46,7 @@ public class AnimationManager : MonoBehaviour
     {
         if (animationObjects.TryGetValue(animationKey, out var anim))
         {
-            anim.StartAnimation(onComplete);
+            anim.StartAnimation(onComplete, null);
             return true;
         }
         return false;
@@ -61,4 +61,6 @@ public class AnimationManager : MonoBehaviour
         }
         return false;
     }
+
+    public bool HasAnimation(string animationKey) { return animationObjects.ContainsKey(animationKey); }
 }

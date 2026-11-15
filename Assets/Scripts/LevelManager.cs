@@ -27,10 +27,8 @@ public static class LevelManager
     private static Dictionary<Scenario, Tuple<Era, int>> scenarioIDs = new Dictionary<Scenario, Tuple<Era, int>>() {
         { Scenario.Train, new Tuple<Era, int>(Era.WildWest, 0) },
         { Scenario.Duel, new Tuple < Era, int >(Era.WildWest, 1) },
-        { Scenario.WitchTrial, new Tuple < Era, int >(Era.Medieval, 0) },
-        { Scenario.Jousting, new Tuple < Era, int >(Era.Medieval, 1) },
-        { Scenario.FreeFall, new Tuple < Era, int >(Era.Future, 0) },
-        { Scenario.Airlock, new Tuple < Era, int >(Era.Future, 1) },
+        //{ Scenario.FreeFall, new Tuple < Era, int >(Era.Future, 0) },
+        //{ Scenario.Airlock, new Tuple < Era, int >(Era.Future, 1) },
     };
 
     private static Dictionary<Era, int> eraSceneIDs = new Dictionary<Era, int>() {
@@ -40,7 +38,8 @@ public static class LevelManager
     };
 
     private static Dictionary<Scenario, Tuple<float, float>> playerMinMaxPitch = new Dictionary<Scenario, Tuple<float, float>>() {
-        { Scenario.Train, new Tuple<float, float>(-65f, 60f) }
+        { Scenario.Train, new Tuple<float, float>(-65f, 60f) },
+        {Scenario.Duel, new Tuple<float, float>(-180f, 180f) }
     };
 
     private static Dictionary<Scenario, Tuple<float, float>> playerMinMaxYaw = new Dictionary<Scenario, Tuple<float, float>>() {
