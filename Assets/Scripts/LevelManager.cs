@@ -9,8 +9,6 @@ public enum Scenario
 {
     Train,
     Duel,
-    WitchTrial,
-    Jousting,
     FreeFall,
     Airlock
 }
@@ -18,7 +16,6 @@ public enum Scenario
 enum Era
 {
     WildWest,
-    Medieval,
     Future
 }
 
@@ -32,9 +29,8 @@ public static class LevelManager
     };
 
     private static Dictionary<Era, int> eraSceneIDs = new Dictionary<Era, int>() {
-        {Era.WildWest, 2 },
-        {Era.Medieval, 1 },
-        {Era.Future, 3 }
+        {Era.WildWest, 1 },
+        {Era.Future, 2 }
     };
 
     private static Dictionary<Scenario, Tuple<float, float>> playerMinMaxPitch = new Dictionary<Scenario, Tuple<float, float>>() {
@@ -100,8 +96,8 @@ public static class LevelManager
             uncompletedScenarios = new List<Scenario>();
             List<Scenario> scenarioFullList = Enum.GetValues(typeof(Scenario)).Cast<Scenario>().ToList();
 
-            uncompletedScenarios.Add(Scenario.Airlock);
-            scenarioFullList.Remove(Scenario.Airlock);
+            uncompletedScenarios.Add(Scenario.Train);
+            scenarioFullList.Remove(Scenario.Train);
 
             while (scenarioFullList.Count > 0)
             {

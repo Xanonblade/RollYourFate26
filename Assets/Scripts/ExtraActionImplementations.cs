@@ -61,7 +61,6 @@ public static class ExtraActionImplementations
             foreach (GameObject item in GameObject.FindGameObjectsWithTag("AirlockDoor")) {
                 GameObject.Destroy(item);
 }        } },
-        } },
         {"dueler1", () =>
         {
             AnimationManager.TriggerAnimation("dueler1_die");

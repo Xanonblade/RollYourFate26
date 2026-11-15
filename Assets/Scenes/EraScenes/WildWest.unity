@@ -1409,6 +1409,8 @@ MonoBehaviour:
   nameID: dueler1
   postActionID: dueler1-unsub
   parallelActionID: 
+  IncomingFlag: 0
+  OutgoingFlag: 1
 --- !u!1001 &362936493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1818,6 +1820,8 @@ MonoBehaviour:
   nameID: sapling_grow
   postActionID: 
   parallelActionID: player_grow
+  IncomingFlag: 0
+  OutgoingFlag: 1
   spell: 1
 --- !u!114 &513882430
 MonoBehaviour:
@@ -2679,6 +2683,8 @@ MonoBehaviour:
   nameID: tree_grow
   postActionID: 
   parallelActionID: 
+  IncomingFlag: 0
+  OutgoingFlag: 1
 --- !u!1001 &843428638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3173,6 +3179,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1449460921}
     m_Modifications:
+    - target: {fileID: 1601679498907280930, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.75
+      objectReference: {fileID: 0}
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalScale.x
       value: 100
@@ -3187,15 +3197,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -123113.19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9345.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 112291.23
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3224,6 +3234,26 @@ PrefabInstance:
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 16dd4406be4128445bf8617ef807fc6b, type: 3}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8885213583942117327, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_Name
@@ -3979,6 +4009,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1697315643}
     m_Modifications:
+    - target: {fileID: 1601679498907280930, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601679498907280930, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601679498907280930, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601679498907280930, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601679498907280930, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.562
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601679498907280930, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601679498907280930, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.922497
@@ -4018,6 +4076,22 @@ PrefabInstance:
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 16dd4406be4128445bf8617ef807fc6b, type: 3}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8885213583942117327, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_Name
@@ -4244,6 +4318,8 @@ MonoBehaviour:
   nameID: cactus3_grow
   postActionID: 
   parallelActionID: 
+  IncomingFlag: 0
+  OutgoingFlag: 1
   spell: 1
 --- !u!114 &1449460924
 MonoBehaviour:
@@ -4966,6 +5042,8 @@ MonoBehaviour:
   nameID: rope_burn
   postActionID: 
   parallelActionID: rope_fire
+  IncomingFlag: 0
+  OutgoingFlag: 1
   spell: 0
 --- !u!114 &1697315648
 MonoBehaviour:
@@ -5081,12 +5159,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 513882427}
     m_Modifications:
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 195.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 195.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 195.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 504
+      value: 868
       objectReference: {fileID: 0}
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5119,6 +5209,26 @@ PrefabInstance:
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 16dd4406be4128445bf8617ef807fc6b, type: 3}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8885213583942117327, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_Name
@@ -5222,6 +5332,8 @@ MonoBehaviour:
   nameID: initial_train_movement
   postActionID: 
   parallelActionID: 
+  IncomingFlag: 0
+  OutgoingFlag: 1
 --- !u!212 &1734091322
 SpriteRenderer:
   serializedVersion: 2
@@ -5609,6 +5721,8 @@ MonoBehaviour:
   nameID: rope_fire
   postActionID: death.1
   parallelActionID: 
+  IncomingFlag: 0
+  OutgoingFlag: 1
 --- !u!1001 &1940624659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5982,6 +6096,8 @@ MonoBehaviour:
   nameID: tumbleweed_pull
   postActionID: dueler1
   parallelActionID: 
+  IncomingFlag: 0
+  OutgoingFlag: 1
   spell: 2
 --- !u!114 &2008291138
 MonoBehaviour:
@@ -6222,16 +6338,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 543450651733365192}
     m_Modifications:
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 70.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 70.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 70.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1216.9581
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -93.459
+      value: 652
       objectReference: {fileID: 0}
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1132.4209
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6260,6 +6388,26 @@ PrefabInstance:
     - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021002794094347422, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 16dd4406be4128445bf8617ef807fc6b, type: 3}
+    - target: {fileID: 6121524062658386205, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8885213583942117327, guid: 72946ae4c01b2314f892f94d53b2a86b, type: 3}
       propertyPath: m_Name
@@ -6747,6 +6895,8 @@ MonoBehaviour:
   nameID: cactus0_grow
   postActionID: 
   parallelActionID: 
+  IncomingFlag: 0
+  OutgoingFlag: 1
   spell: 1
 --- !u!114 &3469287837865254512
 MonoBehaviour:
@@ -6885,6 +7035,8 @@ MonoBehaviour:
   nameID: player_grow
   postActionID: next_level.1
   parallelActionID: tree_grow
+  IncomingFlag: 0
+  OutgoingFlag: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
