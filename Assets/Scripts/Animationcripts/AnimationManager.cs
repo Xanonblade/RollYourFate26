@@ -46,7 +46,7 @@ public class AnimationManager : MonoBehaviour
     {
         if (animationObjects.TryGetValue(animationKey, out var anim))
         {
-            anim.StartAnimation(onComplete);
+            anim.StartAnimation(onComplete, null);
             return true;
         }
         return false;

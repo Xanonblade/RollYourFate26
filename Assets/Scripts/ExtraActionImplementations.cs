@@ -21,6 +21,11 @@ public static class ExtraActionImplementations
         {
             Debug.Log("Here the level ends");
         }
+        },
+
+        {"tree_grow", () => {
+            AnimationManager.Instance.TriggerAnimation("tree_grow");
+        }
         }
     };
 
