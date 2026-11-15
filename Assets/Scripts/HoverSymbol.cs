@@ -51,7 +51,6 @@ public class HoverSymbol : MonoBehaviour
         for (int i = 0; i < validSymbols.Count; i++)
         {
             sprites[i].transform.position = transform.position + transform.right * (-1 * ((validSymbols.Count - 1) / 2f) + 1 * i);
-            Debug.Log(-1 * ((validSymbols.Count - 1) / 2f) + 1 * i);
 
             sprites[i].gameObject.SetActive(true);
             sprites[i].sprite = Sprite.Create(validSymbols[i], new Rect(0, 0, ICON_PIXEL_SIZE, ICON_PIXEL_SIZE), Vector2.zero);
