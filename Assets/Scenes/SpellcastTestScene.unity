@@ -175,7 +175,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1054172516347119929, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2103020037155541195, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
       propertyPath: m_LocalPosition.x
@@ -485,6 +485,7 @@ MonoBehaviour:
   - 8
   - 1
   nameID: Burn
+  postActionID: 
 --- !u!114 &461112365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,6 +519,7 @@ MonoBehaviour:
   - 8
   - 1
   nameID: Grow
+  postActionID: 
 --- !u!1 &730707928
 GameObject:
   m_ObjectHideFlags: 0

@@ -43,7 +43,7 @@ public class RunWhisper : MonoBehaviour
 	/// <summary>
 	/// To notify that it's safe to access or manipulate data
 	/// </summary>
-	bool safeToInteract;
+	bool safeToInteract = true;
 	public bool SafeToInteract { get { return safeToInteract; } set { safeToInteract = value; } }
 
 	const int maxSamples = 30 * 16000;
@@ -130,6 +130,7 @@ public class RunWhisper : MonoBehaviour
 
 	async Awaitable RecordThenPrepareAudio()
 	{
+		/*
 		if (Microphone.devices.Length == 0)
 		{
 			Debug.LogError("No microphone detected.");
@@ -152,6 +153,7 @@ public class RunWhisper : MonoBehaviour
 
 		//Debug.Log("Recording complete. Preparing transcription...");
 
+		*/
 		LoadAudio();
 		EncodeAudio();
 
@@ -271,7 +273,7 @@ public class RunWhisper : MonoBehaviour
 		else if (index < tokens.Length)
 		{
 			outputString += GetUnicodeText(tokens[index]);
-			//Debug.Log(outputString);
+			Debug.Log(outputString);
 		}
 	}
 

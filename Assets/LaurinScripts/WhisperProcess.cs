@@ -20,23 +20,34 @@ public class WhisperProcess : MonoBehaviour
     // Update is called once per frame, runs model as often as possible
     void Update()
     {
-        if (!hasStarted)
-        {
-            //Call whisper once to start, not awaiting because hasStarted and SafeToInteract prevent issues
-            _ = model.WhisperSession();
-            hasStarted = true;
-        }
+        
 
         //Knows when async processes are complete
         //  Sets speech to most updated, then run model again
         //  Goal is to have speech update as often as possible to be more accurate in terms of recency
-        if (model.SafeToInteract)
+        if (model.SafeToInteract && hasStarted)
         {
+            hasStarted = false;
             finalSpeech = model.OutString;
             Debug.Log(finalSpeech);
+            //_ = model.WhisperSession();
+            //model.SafeToInteract = false;
+        }
+        else
+        {
+            finalSpeech = "";
+        }
+    }
+
+    public void StartParse()
+    {
+        if (model.SafeToInteract)
+        {
             _ = model.WhisperSession();
             model.SafeToInteract = false;
+            hasStarted = true;
         }
+       
     }
 
     /// <summary>
