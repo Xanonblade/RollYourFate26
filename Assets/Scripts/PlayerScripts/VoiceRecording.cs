@@ -8,7 +8,7 @@ public class VoiceRecording : MonoBehaviour
     [SerializeField] private AudioClip trueAudioClip;
 
     [Header("Microphone Settings")]
-    public float recordingSeconds = 3;
+    public int recordingSeconds = 3;
     public int sampleRate = 16000;
 
     private float timer = 0;
@@ -75,21 +75,18 @@ public class VoiceRecording : MonoBehaviour
 
     public async Awaitable StartRecording()
     {
-        Time.timeScale = 0.1f;
 
         string micName = Microphone.devices[0];
 
         if (!Microphone.IsRecording(micName))
         {
-            trueAudioClip = Microphone.Start(micName, false, 3, sampleRate);
+            trueAudioClip = Microphone.Start(micName, false, recordingSeconds, sampleRate);
             timer = 0;
         }
 
         await Awaitable.WaitForSecondsAsync(recordingSeconds);
 
         Microphone.End(micName);
-
-        Time.timeScale = 1f;
 
         GetComponent<RunWhisper>().audioClip = trueAudioClip;
         GetComponentInParent<WhisperProcess>().StartParse();
