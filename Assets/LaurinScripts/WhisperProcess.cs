@@ -33,10 +33,6 @@ public class WhisperProcess : MonoBehaviour
             //_ = model.WhisperSession();
             //model.SafeToInteract = false;
         }
-        else
-        {
-            finalSpeech = "";
-        }
     }
 
     public void StartParse()
@@ -60,6 +56,8 @@ public class WhisperProcess : MonoBehaviour
         //Compare speech to spell enum
         string[] spellArray = Spells.GetNames(typeof(Spells));
         string speechFixed = new string(finalSpeech.Where(c => !char.IsPunctuation(c)).ToArray());
+
+        finalSpeech = "";
 
         //Fuzzy comparisons
         for (int i = 0; i < spellArray.Length; i++)
