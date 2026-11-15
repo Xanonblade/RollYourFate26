@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VoiceRecording
   testAudioClip: {fileID: 0}
   trueAudioClip: {fileID: 0}
-  recordingSeconds: 3
+  recordingSeconds: 3.03
   sampleRate: 16000
 --- !u!1 &5953181067369513809
 GameObject:

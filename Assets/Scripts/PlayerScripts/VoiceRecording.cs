@@ -8,12 +8,9 @@ public class VoiceRecording : MonoBehaviour
     [SerializeField] private AudioClip trueAudioClip;
 
     [Header("Microphone Settings")]
-    public int recordingSeconds = 3;
+    public float recordingSeconds = 2.5f;
     public int sampleRate = 16000;
 
-    private float timer = 0;
-
-    float[] clipSampleData = new float[16000];
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     IEnumerator Start()
@@ -39,37 +36,6 @@ public class VoiceRecording : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        string micName = Microphone.devices[0];
-
-        //Debug.Log("Using microphone: " + micName);
-        //Debug.Log("Recording...");
-
-        if (timer >= recordingSeconds)
-        {
-            timer = 0;
-
-            if (Microphone.IsRecording(micName))
-            {
-                Microphone.End(micName);
-
-                testAudioClip.GetData(clipSampleData, 0);
-
-                float clipLoudness = 0f;
-                foreach (var sample in clipSampleData)
-                {
-                    clipLoudness += Mathf.Abs(sample);
-                }
-                clipLoudness /= testAudioClip.channels * testAudioClip.samples; //clipLoudness is what you are looking for
-
-                Debug.Log(clipLoudness);
-            }
-
-            testAudioClip = Microphone.Start(micName, false, 1, sampleRate);
-
-        }
-        */
-
         
     }
 
@@ -80,11 +46,10 @@ public class VoiceRecording : MonoBehaviour
 
         if (!Microphone.IsRecording(micName))
         {
-            trueAudioClip = Microphone.Start(micName, false, recordingSeconds, sampleRate);
-            timer = 0;
+            trueAudioClip = Microphone.Start(micName, false, 5, sampleRate);
         }
 
-        await Awaitable.WaitForSecondsAsync(recordingSeconds);
+        await Awaitable.WaitForSecondsAsync(recordingSeconds * Time.timeScale);
 
         Microphone.End(micName);
 

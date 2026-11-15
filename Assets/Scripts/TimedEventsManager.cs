@@ -77,5 +77,6 @@ public class TimedEventsManager : MonoBehaviour
     private void GameOver()
     {
         GameObject.Instantiate(gameOverPrefab).SetActive(true);
+        //TODO: Maybe open new scene
     }
 }
