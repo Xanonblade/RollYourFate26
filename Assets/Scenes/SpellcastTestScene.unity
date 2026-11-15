@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 461112364}
   - component: {fileID: 461112365}
   - component: {fileID: 461112366}
+  - component: {fileID: 461112367}
   m_Layer: 0
   m_Name: Cube1
   m_TagString: KeyItem
@@ -603,6 +604,27 @@ MonoBehaviour:
   - 1
   nameID: Grow
   postActionID: 
+--- !u!135 &461112367
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461112358}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.72
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &730707928
 GameObject:
   m_ObjectHideFlags: 0
