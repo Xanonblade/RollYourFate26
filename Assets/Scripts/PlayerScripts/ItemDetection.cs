@@ -15,7 +15,12 @@ public class ItemDetection : MonoBehaviour
             {
                 // Call Information
                 Debug.Log("Hit Key Item");
-                hit.collider.GetComponent<InteractableObject>().CastSpellOnThis(Spells.Burn);
+
+                //Check if spell is correct in WhisperProcess
+                if (gameObject.GetComponent<WhisperProcess>().MatchSpell(out Spells finalSpell))
+                {
+                    hit.collider.GetComponent<InteractableObject>().CastSpellOnThis(finalSpell);
+                }
             }
         }
     }

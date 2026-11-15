@@ -40,6 +40,12 @@ public class RunWhisper : MonoBehaviour
 	//To access output in other files
 	public string OutString { get { return outputString; } }
 
+	/// <summary>
+	/// To notify that it's safe to access or manipulate data
+	/// </summary>
+	bool safeToInteract;
+	public bool SafeToInteract { get { return safeToInteract; } set { safeToInteract = value; } }
+
 	const int maxSamples = 30 * 16000;
 
 	public ModelAsset audioDecoder1, audioDecoder2;
@@ -54,7 +60,8 @@ public class RunWhisper : MonoBehaviour
 	Tensor<int> tokensTensor;
 	Tensor<float> audioInput;
 
-	public async void Whisper()
+	//Start does the initial setup and heavy resources
+	public void Start()
 	{
         SetupWhiteSpaceShifts();
         GetTokens();
@@ -73,23 +80,41 @@ public class RunWhisper : MonoBehaviour
 
         outputTokens = new NativeArray<int>(maxTokens, Allocator.Persistent);
 
+        tokensTensor = new Tensor<int>(new TensorShape(1, maxTokens));
+        ComputeTensorData.Pin(tokensTensor);
+
+        lastToken = new NativeArray<int>(1, Allocator.Persistent);
+        lastTokenTensor = new Tensor<int>(new TensorShape(1, 1), new[] { NO_TIME_STAMPS });
+    }
+
+	/// <summary>
+	/// Calls the Whisper-tiny model
+	/// </summary>
+	public async Awaitable WhisperSession()
+	{
+		//Reset flags, counter, output
+		transcribe = true;
+        tokenCount = 3;
+		//Debug.Log("here session");
+		outputString = "";
+
+		//Start tokens
         outputTokens[0] = START_OF_TRANSCRIPT;
         outputTokens[1] = ENGLISH;
         outputTokens[2] = TRANSCRIBE;
 
-        tokenCount = 3;
-
+		//Record and process new audio
         await RecordThenPrepareAudio();
 
-        tokensTensor = new Tensor<int>(new TensorShape(1, maxTokens));
-        ComputeTensorData.Pin(tokensTensor);
+		//Reset GPU tensors
         tokensTensor.Reshape(new TensorShape(1, tokenCount));
         tokensTensor.dataOnBackend.Upload<int>(outputTokens, tokenCount);
 
-        lastToken = new NativeArray<int>(1, Allocator.Persistent);
+		//End tokens
         lastToken[0] = NO_TIME_STAMPS;
-        lastTokenTensor = new Tensor<int>(new TensorShape(1, 1), new[] { NO_TIME_STAMPS });
-
+		lastTokenTensor.dataOnBackend.Upload<int>(lastToken, 1);
+        
+		//Transcription loop
         while (true)
         {
             if (!transcribe || tokenCount >= outputTokens.Length - 1)
@@ -97,6 +122,9 @@ public class RunWhisper : MonoBehaviour
 
             m_Awaitable = InferenceStep();
             await m_Awaitable;
+
+			//Everything is complete for this run
+            RespondToAsync();
         }
     }
 
@@ -110,8 +138,8 @@ public class RunWhisper : MonoBehaviour
 
 		string micName = Microphone.devices[0];
 
-		Debug.Log("Using microphone: " + micName);
-		Debug.Log("Recording...");
+		//Debug.Log("Using microphone: " + micName);
+		//Debug.Log("Recording...");
 
 		audioClip = Microphone.Start(micName, false, recordingSeconds, sampleRate);
 
@@ -122,7 +150,7 @@ public class RunWhisper : MonoBehaviour
 
 		Microphone.End(micName);
 
-		Debug.Log("Recording complete. Preparing transcription...");
+		//Debug.Log("Recording complete. Preparing transcription...");
 
 		LoadAudio();
 		EncodeAudio();
@@ -238,12 +266,12 @@ public class RunWhisper : MonoBehaviour
 		if (index == END_OF_TEXT)
 		{
 			transcribe = false;
-			Debug.Log("Final transcription: " + outputString);
+			//Debug.Log("F||:" + outputString);
 		}
 		else if (index < tokens.Length)
 		{
 			outputString += GetUnicodeText(tokens[index]);
-			Debug.Log(outputString);
+			//Debug.Log(outputString);
 		}
 	}
 
@@ -289,6 +317,37 @@ public class RunWhisper : MonoBehaviour
 	bool IsWhiteSpace(char c)
 	{
 		return !(('!' <= c && c <= '~') || ('�' <= c && c <= '�') || ('�' <= c && c <= '�'));
+	}
+	
+	/// <summary>
+	/// Does same as destroy, clears memory
+	/// </summary>
+	public void Dispose()
+	{
+        decoder1?.Dispose();
+        decoder2?.Dispose();
+        encoder?.Dispose();
+        spectrogram?.Dispose();
+        argmax?.Dispose();
+
+        audioInput?.Dispose();
+        lastTokenTensor?.Dispose();
+        tokensTensor?.Dispose();
+
+        if (outputTokens.IsCreated)
+            outputTokens.Dispose();
+
+        if (lastToken.IsCreated)
+            lastToken.Dispose();
+    }
+
+	/// <summary>
+	/// Serves to tell other scripts when we're done with asynchronous processes
+	/// </summary>
+	/// <returns>True, meaning we are complete</returns>
+	public void RespondToAsync()
+	{
+		safeToInteract = true;
 	}
 
 	private void OnDestroy()

@@ -45,7 +45,7 @@ public class InteractableObject : MonoBehaviour
 
     public void CastSpellOnThis(Spells spell)
     {
-        //play animation and update flags
+        //play animation and update flags, checks if the spell is valid for that object
         if (validSpells.ContainsKey(spell)) {
             if (validSpells[spell].IncomingFlag == flag)
             {
