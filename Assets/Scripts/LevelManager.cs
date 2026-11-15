@@ -40,6 +40,7 @@ public static class LevelManager
     private static Dictionary<Scenario, Tuple<float, float>> playerMinMaxPitch = new Dictionary<Scenario, Tuple<float, float>>() {
         { Scenario.Train, new Tuple<float, float>(-65f, 60f) },
         { Scenario.Airlock, new Tuple<float, float>(-65f, 60f) },
+        {Scenario.Duel, new Tuple<float, float>(-180f, 180f) }
     };
 
     private static Dictionary<Scenario, Tuple<float, float>> playerMinMaxYaw = new Dictionary<Scenario, Tuple<float, float>>() {

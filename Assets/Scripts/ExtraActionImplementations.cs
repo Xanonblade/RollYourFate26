@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public static class ExtraActionImplementations
 {
+    
     private static Dictionary<string, Action> actionDictionary = new Dictionary<string, Action>()
     {
         // Test Action
@@ -30,13 +31,16 @@ public static class ExtraActionImplementations
 
         {"player_grow", () => {
             AnimationManager.TriggerAnimation("player_grow");
+            // Play sfx with available object
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayFireSpell();
         }
         },
 
         {"rope_fire", () =>
         {
             AnimationManager.TriggerAnimation("rope_fire");
-            
+            // Play sfx with available object
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayFireSpell();
         } },
 
         {"death.1", () =>
@@ -46,6 +50,8 @@ public static class ExtraActionImplementations
 
         {"death.2", () =>
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             LevelManager.RestartLevel();
         } },
         {"keypad.1", () => {
@@ -55,6 +61,21 @@ public static class ExtraActionImplementations
             foreach (GameObject item in GameObject.FindGameObjectsWithTag("AirlockDoor")) {
                 GameObject.Destroy(item);
 }        } },
+        } },
+        {"dueler1", () =>
+        {
+            AnimationManager.TriggerAnimation("dueler1_die");
+        } },
+
+        {"dueler1-unsub", () =>
+        {
+            TimedEventsManager.Instance.UnqueueEvent("dueler1-shoot");
+        } },
+
+        {"dueler2-unsub", () =>
+        {
+            TimedEventsManager.Instance.UnqueueEvent("dueler2-shoot");
+        } }
     };
 
     public static Action GetAction(string key)
@@ -66,5 +87,10 @@ public static class ExtraActionImplementations
         }
         Debug.LogError($"No extra action registered for '{key}'");
         return () => { };
+    }
+
+    public static void RemoveAction(string key)
+    {
+        actionDictionary.Remove(key);
     }
 }

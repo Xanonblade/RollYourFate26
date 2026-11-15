@@ -47,6 +47,10 @@ public class AnimationData : MonoBehaviour
             parallelAction = ExtraActionImplementations.GetAction(parallelActionID);
         }
     }
+    protected virtual void OnDestroy()
+    {
+        transform.DOKill();
+    }
 
     /// <summary>
     /// Starts playing the animation
