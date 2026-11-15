@@ -39,17 +39,6 @@ public class VoiceRecording : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        string micName = Microphone.devices[0];
-
-        timer += Time.deltaTime;
-
-        if (timer >= recordingSeconds && Microphone.IsRecording(micName))
-        {
-            Microphone.End(micName);
-
-            GetComponent<RunWhisper>().audioClip = trueAudioClip;
-            GetComponentInParent<WhisperProcess>().StartParse();
-        }
         /*
         string micName = Microphone.devices[0];
 
@@ -84,8 +73,10 @@ public class VoiceRecording : MonoBehaviour
         
     }
 
-    public void StartRecording()
+    public async Awaitable StartRecording()
     {
+        Time.timeScale = 0.1f;
+
         string micName = Microphone.devices[0];
 
         if (!Microphone.IsRecording(micName))
@@ -93,6 +84,14 @@ public class VoiceRecording : MonoBehaviour
             trueAudioClip = Microphone.Start(micName, false, 3, sampleRate);
             timer = 0;
         }
-        
+
+        await Awaitable.WaitForSecondsAsync(recordingSeconds);
+
+        Microphone.End(micName);
+
+        Time.timeScale = 1f;
+
+        GetComponent<RunWhisper>().audioClip = trueAudioClip;
+        GetComponentInParent<WhisperProcess>().StartParse();
     }
 }

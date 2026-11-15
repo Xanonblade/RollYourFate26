@@ -12,10 +12,6 @@ public class RunWhisper : MonoBehaviour
 
 	public AudioClip audioClip;
 
-	[Header("Microphone Settings")]
-	public int recordingSeconds = 3;
-	public int sampleRate = 16000;
-
 	const int maxTokens = 100;
 
 	const int END_OF_TEXT = 50257;
@@ -273,7 +269,7 @@ public class RunWhisper : MonoBehaviour
 		else if (index < tokens.Length)
 		{
 			outputString += GetUnicodeText(tokens[index]);
-			Debug.Log(outputString);
+			//Debug.Log(outputString);
 		}
 	}
 

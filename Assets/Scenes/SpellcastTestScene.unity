@@ -217,6 +217,70 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4346045216429571892, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionId
+      value: ddebf2c8-5a8d-4af2-b55e-c83a89006734
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionName
+      value: 'Player/Shift[/Keyboard/leftShift]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 331575886}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 331575890}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPlayerMouseDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: FPLook, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Looker, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570282512848761840, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5953181067369513809, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
       propertyPath: m_Name
       value: Player
@@ -224,7 +288,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1477554342170203787, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2126756720}
   m_SourcePrefab: {fileID: 100100000, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
 --- !u!1 &242344805
 GameObject:
@@ -348,6 +415,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
+--- !u!1 &331575886 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5953181067369513809, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+  m_PrefabInstance: {fileID: 161597669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &331575890 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5265889848092626251, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+  m_PrefabInstance: {fileID: 161597669}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331575886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8191ce5a2f48e9a4797b2a2fd9f8e132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FPLook
 --- !u!1 &461112358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,6 +1229,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2126756714 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1477554342170203787, guid: 1185c2b6d0b54d64da7447280b38a304, type: 3}
+  m_PrefabInstance: {fileID: 161597669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2126756720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126756714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca4400839705474aa510d4313974a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VoiceRecording
+  testAudioClip: {fileID: 0}
+  trueAudioClip: {fileID: 0}
+  recordingSeconds: 0.2
+  sampleRate: 16000
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
