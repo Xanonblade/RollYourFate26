@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimedEventsManager : MonoBehaviour
 {
@@ -87,7 +88,8 @@ public class TimedEventsManager : MonoBehaviour
 
     private void GameOver()
     {
-        GameObject.Instantiate(gameOverPrefab).SetActive(true);
+        // GameObject.Instantiate(gameOverPrefab).SetActive(true);
         //TODO: Maybe open new scene
+        SceneManager.LoadScene("MainMenu");
     }
 }
