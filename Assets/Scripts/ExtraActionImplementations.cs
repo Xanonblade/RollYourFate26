@@ -23,8 +23,8 @@ public static class ExtraActionImplementations
         }
         },
 
-        {"tree_grow", () => {
-            AnimationManager.Instance.TriggerAnimation("tree_grow");
+        {"player_grow", () => {
+            AnimationManager.Instance.TriggerAnimation("player_grow");
         }
         }
     };
@@ -32,6 +32,10 @@ public static class ExtraActionImplementations
     public static Action GetAction(string key)
     {
         if (actionDictionary.TryGetValue(key, out var action)) return action;
+        if (AnimationManager.Instance.HasAnimation(key))
+        {
+            return () => { AnimationManager.Instance.TriggerAnimation(key); };
+        }
         Debug.LogError($"No extra action registered for '{key}'");
         return () => { };
     }

@@ -61,4 +61,6 @@ public class AnimationManager : MonoBehaviour
         }
         return false;
     }
+
+    public bool HasAnimation(string animationKey) { return animationObjects.ContainsKey(animationKey); }
 }
