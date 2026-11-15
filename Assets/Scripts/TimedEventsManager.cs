@@ -74,6 +74,17 @@ public class TimedEventsManager : MonoBehaviour
         events.Add(te);
     }
 
+    public void UnqueueEvent(string actionID) {
+        foreach (TimedEvent te in events)
+        {
+            if (te.actionID == actionID)
+            {
+                events.Remove(te);
+                return;
+            }
+        }
+    }
+
     private void GameOver()
     {
         GameObject.Instantiate(gameOverPrefab).SetActive(true);

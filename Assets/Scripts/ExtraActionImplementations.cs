@@ -46,6 +46,21 @@ public static class ExtraActionImplementations
         {"death.2", () =>
         {
             SceneManager.LoadScene("MainMenu");
+        } },
+
+        {"dueler1", () =>
+        {
+            AnimationManager.TriggerAnimation("dueler1_die");
+        } },
+
+        {"dueler1-unsub", () =>
+        {
+            TimedEventsManager.Instance.UnqueueEvent("dueler1-shoot");
+        } },
+
+        {"dueler2-unsub", () =>
+        {
+            TimedEventsManager.Instance.UnqueueEvent("dueler2-shoot");
         } }
     };
 
@@ -58,5 +73,10 @@ public static class ExtraActionImplementations
         }
         Debug.LogError($"No extra action registered for '{key}'");
         return () => { };
+    }
+
+    public static void RemoveAction(string key)
+    {
+        actionDictionary.Remove(key);
     }
 }
