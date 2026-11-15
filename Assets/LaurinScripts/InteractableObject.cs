@@ -21,6 +21,7 @@ public class InteractableObject : MonoBehaviour
     protected Dictionary<Spells, AnimationData> validSpells;
     private HoverSymbol hoverVisual;
     private bool hovered = false;
+    private MeshRenderer mesh;
     
     /// <summary>
     /// Use this to set conditions on when the action can be performed
@@ -31,6 +32,7 @@ public class InteractableObject : MonoBehaviour
     {
         AnimationData[] anims = GetComponents<AnimationData>();
         validSpells = new Dictionary<Spells, AnimationData>();
+        mesh = GetComponent<MeshRenderer>();
 
         //populate animations to play
         for (int i = 0; i < anims.Length; i++)
@@ -57,12 +59,14 @@ public class InteractableObject : MonoBehaviour
         if (!hovered)
         {
             hoverVisual.gameObject.SetActive(false);
-            GetComponent<MeshRenderer>().materials[1].color = Color.black;
+            if (mesh.materials.Length > 1)
+                mesh.materials[1].color = Color.black;
         }
         else
         {
             hoverVisual.gameObject.SetActive(true);
-            GetComponent<MeshRenderer>().materials[1].color = Color.yellow;
+            if (mesh.materials.Length > 1)
+                mesh.materials[1].color = Color.yellow;
         }
     }
 
