@@ -28,7 +28,6 @@ public class AudioFadeOut : MonoBehaviour
         {
             // Decrement volume level
             audioSource.volume += decrementValue;
-            Debug.Log("Decrementing");
         }
         
         // alter time
