@@ -39,16 +39,54 @@ public static class LevelManager
         {Era.Future, 3 }
     };
 
+    private static Dictionary<Scenario, Tuple<float, float>> playerMinMaxPitch = new Dictionary<Scenario, Tuple<float, float>>() {
+        { Scenario.Train, new Tuple<float, float>(-65f, 60f) }
+    };
+
+    private static Dictionary<Scenario, Tuple<float, float>> playerMinMaxYaw = new Dictionary<Scenario, Tuple<float, float>>() {
+        { Scenario.Train, new Tuple<float, float>(-80f, 80f) }
+    };
+
     private static List<Scenario> uncompletedScenarios;
 
-    private static Vector3 spawnLocation;
+    private static Transform spawnTransform;
 
     private static Scenario currentLevel;
 
     /// <summary>
-    /// Which location to spawn the player at when the scene loads
+    /// The location to spawn the player at when the scene loads
     /// </summary>
-    public static Vector3 SpawnLocation => spawnLocation;
+    public static Vector3 SpawnLocation => spawnTransform.position;
+
+    /// <summary>
+    /// The rotation to give the player when the scene loads
+    /// </summary>
+    public static Quaternion SpawnRotation => spawnTransform.rotation;
+
+    /// <summary>
+    /// The minimum pitch for the players head movement this scenario
+    /// </summary>
+    public static float GetMinPitch { get { return playerMinMaxPitch[CurrentScenario].Item1; } }
+
+    /// <summary>
+    /// The maximum pitch for the players head movement this scenario
+    /// </summary>
+    public static float GetMaxPitch { get { return playerMinMaxPitch[CurrentScenario].Item2; } }
+
+    /// <summary>
+    /// The minimum yaw for the players head movement this scenario
+    /// </summary>
+    public static float GetMinYaw { get { return playerMinMaxYaw[CurrentScenario].Item1; } }
+
+    /// <summary>
+    /// The maximum yaw for the players head movement this scenario
+    /// </summary>
+    public static float GetMaxYaw { get { return playerMinMaxYaw[CurrentScenario].Item2; } }
+
+    /// <summary>
+    /// The current scenario loaded
+    /// </summary>
+    public static Scenario CurrentScenario { get { return currentLevel; } }
 
     /// <summary>
     /// Load an unloaded level scene
@@ -93,9 +131,8 @@ public static class LevelManager
         Debug.Log(temp);
 
         //find correct spawn position
-        spawnLocation = GameObject.FindWithTag("SpawnPoints")
+        spawnTransform = GameObject.FindWithTag("SpawnPoints")
             .GetComponent<SpawnPoints>()
-            .SpawnPointsList[scenarioData.Item2]
-            .position;
+            .SpawnPointsList[scenarioData.Item2];
     }
 }

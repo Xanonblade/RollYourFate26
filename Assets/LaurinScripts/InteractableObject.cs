@@ -15,9 +15,13 @@ public enum Spells
     Cleave   //Cuts objects in half
 }
 
+[RequireComponent(typeof(Collider))]
 public class InteractableObject : MonoBehaviour
 {
-    protected Dictionary<Spells, AnimationData> validSpells;
+    protected Dictionary<Spells, SpellAnimationData> validSpells;
+    private HoverSymbol hoverVisual;
+    private bool hovered = false;
+    private MeshRenderer mesh;
     
     /// <summary>
     /// Use this to set conditions on when the action can be performed
@@ -26,26 +30,49 @@ public class InteractableObject : MonoBehaviour
 
     void Start()
     {
-        AnimationData[] anims = GetComponents<AnimationData>();
-        validSpells = new Dictionary<Spells, AnimationData>();
+        SpellAnimationData[] anims = GetComponents<SpellAnimationData>();
+        validSpells = new Dictionary<Spells, SpellAnimationData>();
+        mesh = GetComponent<MeshRenderer>();
 
         //populate animations to play
         for (int i = 0; i < anims.Length; i++)
         {
-            validSpells.Add((Spells)Enum.Parse(typeof(Spells), anims[i].Name), anims[i]);
+            validSpells.Add(anims[i].Spell, anims[i]);
         }
 
+        hoverVisual = GetComponentInChildren<HoverSymbol>();
+        if (hoverVisual == null)
+        {
+            throw new Exception("No hover!!");
+        }
+
+        hoverVisual.UpdateTexture(
+            validSpells
+                .Where((x) => x.Value.IncomingFlag == flag)
+                .Select((x) => x.Key)
+                .ToList());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!hovered)
+        {
+            hoverVisual.gameObject.SetActive(false);
+            if (mesh.materials.Length > 1)
+                mesh.materials[1].color = Color.black;
+        }
+        else
+        {
+            hoverVisual.gameObject.SetActive(true);
+            if (mesh.materials.Length > 1)
+                mesh.materials[1].color = Color.yellow;
+        }
     }
 
     public void CastSpellOnThis(Spells spell)
     {
-        //play animation and update flags
+        //play animation and update flags, checks if the spell is valid for that object
         if (validSpells.ContainsKey(spell)) {
             if (validSpells[spell].IncomingFlag == flag)
             {
@@ -54,6 +81,16 @@ public class InteractableObject : MonoBehaviour
             }
             
         }
-        
+
+        hoverVisual.UpdateTexture(
+            validSpells
+                .Where((x) => x.Value.IncomingFlag == flag)
+                .Select((x) => x.Key)
+                .ToList());
+    }
+
+    public void ToggleHover()
+    {
+        hovered = !hovered;
     }
 }
