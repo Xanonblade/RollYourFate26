@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public static class ExtraActionImplementations
 {
+    
     private static Dictionary<string, Action> actionDictionary = new Dictionary<string, Action>()
     {
         // Test Action
@@ -30,13 +31,16 @@ public static class ExtraActionImplementations
 
         {"player_grow", () => {
             AnimationManager.TriggerAnimation("player_grow");
+            // Play sfx with available object
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayFireSpell();
         }
         },
 
         {"rope_fire", () =>
         {
             AnimationManager.TriggerAnimation("rope_fire");
-            
+            // Play sfx with available object
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayFireSpell();
         } },
 
         {"death.1", () =>

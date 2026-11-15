@@ -21,4 +21,9 @@ public class AudioManager : MonoBehaviour
         this.gameObject.transform.GetChild(0).GetComponent<AudioSource>().Play();
         this.gameObject.transform.GetChild(1).GetComponent<AudioSource>().Play();
     }
+
+    public void PlayGrowSpell()
+    {
+        this.gameObject.transform.GetChild(2).GetComponent<AudioSource>().Play();
+    }
 }
