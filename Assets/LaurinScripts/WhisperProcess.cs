@@ -29,7 +29,7 @@ public class WhisperProcess : MonoBehaviour
         {
             hasStarted = false;
             finalSpeech = model.OutString;
-            Debug.Log(finalSpeech);
+            //Debug.Log(finalSpeech);
             //_ = model.WhisperSession();
             //model.SafeToInteract = false;
         }
@@ -57,6 +57,7 @@ public class WhisperProcess : MonoBehaviour
         string[] spellArray = Spells.GetNames(typeof(Spells));
         string speechFixed = new string(finalSpeech.Where(c => !char.IsPunctuation(c)).ToArray());
 
+        if (finalSpeech != "") Debug.Log(finalSpeech);
         finalSpeech = "";
 
         //Fuzzy comparisons

@@ -19,6 +19,7 @@ public enum Spells
 public class InteractableObject : MonoBehaviour
 {
     protected Dictionary<Spells, SpellAnimationData> validSpells;
+    public int ValidSpellsCount { get { return validSpells.Where((x) => x.Value.IncomingFlag == flag).Count(); } }
     private HoverSymbol hoverVisual;
     private bool hovered = false;
     private MeshRenderer mesh;
