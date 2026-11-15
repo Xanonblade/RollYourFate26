@@ -12,10 +12,6 @@ public class RunWhisper : MonoBehaviour
 
 	public AudioClip audioClip;
 
-	[Header("Microphone Settings")]
-	public int recordingSeconds = 3;
-	public int sampleRate = 16000;
-
 	const int maxTokens = 100;
 
 	const int END_OF_TEXT = 50257;
@@ -43,7 +39,7 @@ public class RunWhisper : MonoBehaviour
 	/// <summary>
 	/// To notify that it's safe to access or manipulate data
 	/// </summary>
-	bool safeToInteract;
+	bool safeToInteract = true;
 	public bool SafeToInteract { get { return safeToInteract; } set { safeToInteract = value; } }
 
 	const int maxSamples = 30 * 16000;
@@ -130,6 +126,7 @@ public class RunWhisper : MonoBehaviour
 
 	async Awaitable RecordThenPrepareAudio()
 	{
+		/*
 		if (Microphone.devices.Length == 0)
 		{
 			Debug.LogError("No microphone detected.");
@@ -152,6 +149,7 @@ public class RunWhisper : MonoBehaviour
 
 		//Debug.Log("Recording complete. Preparing transcription...");
 
+		*/
 		LoadAudio();
 		EncodeAudio();
 

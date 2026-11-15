@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
 public class Looker : MonoBehaviour
 {
+    public event EventHandler StartRecording;
+
     public float lookSpeed = 30f;
 
     public float maxPitch = 60f;
@@ -40,5 +43,13 @@ public class Looker : MonoBehaviour
         pitch -= input.y;
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
         playerCam.transform.localRotation = Quaternion.Euler(pitch, yaw, 0f);
+
+    }
+
+    //TODO: Move to its own file?
+    public void OnPlayerMouseDown(InputAction.CallbackContext context)
+    {
+
+        GetComponentInChildren<VoiceRecording>().StartRecording();
     }
 }
