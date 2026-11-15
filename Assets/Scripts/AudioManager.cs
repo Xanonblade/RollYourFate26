@@ -1,0 +1,15 @@
+using UnityEngine;
+
+public class AudioManager : MonoBehaviour
+{
+    void Awake()
+    {
+        GameObject[] obj = GameObject.FindGameObjectsWithTag("Music");
+
+        if (obj.Length > 1)
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
+}
