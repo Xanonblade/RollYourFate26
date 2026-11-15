@@ -19,7 +19,7 @@ public class InteractableObject : MonoBehaviour
 {
     protected Dictionary<Spells, AnimationData> validSpells;
     private HoverSymbol hoverVisual;
-    private float timer = 0.1f;
+    private bool hovered = false;
     
     /// <summary>
     /// Use this to set conditions on when the action can be performed
@@ -53,8 +53,7 @@ public class InteractableObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;  
-        if (timer <= 0)
+        if (!hovered)
         {
             hoverVisual.gameObject.SetActive(false);
         }
@@ -83,8 +82,8 @@ public class InteractableObject : MonoBehaviour
                 .ToList());
     }
 
-    public void Hover()
+    public void ToggleHover()
     {
-        timer = 0.1f;
+        hovered = !hovered;
     }
 }
