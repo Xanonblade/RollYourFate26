@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8676257741085197242}
   - component: {fileID: 1702275491014716671}
   - component: {fileID: 362683420397765038}
+  - component: {fileID: 4346045216429571892}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -137,6 +138,26 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &4346045216429571892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477554342170203787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9744ee88d1e6f05478b4a97f8e272d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RunWhisper
+  audioClip: {fileID: 0}
+  recordingSeconds: 5
+  sampleRate: 16000
+  audioDecoder1: {fileID: 5022602860645237092, guid: e5ab4ce032ddc0740ae8355abb43b9e4, type: 3}
+  audioDecoder2: {fileID: 5022602860645237092, guid: 536701a2302ffa94b9e3d1ddffdf8ff9, type: 3}
+  audioEncoder: {fileID: 5022602860645237092, guid: 7ec644b8281195945b55901ba69f40c8, type: 3}
+  logMelSpectro: {fileID: 5022602860645237092, guid: 152c7cee1b148a3449f904ab30368c22, type: 3}
+  vocabAsset: {fileID: 4900000, guid: 19673ddddfa45f64182b645f4a034877, type: 3}
 --- !u!1 &5953181067369513809
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,6 +170,7 @@ GameObject:
   - component: {fileID: 7177235082723201262}
   - component: {fileID: 1267059958602015648}
   - component: {fileID: 287795817605931828}
+  - component: {fileID: 1054172516347119929}
   - component: {fileID: 5265889848092626251}
   - component: {fileID: 5570282512848761840}
   - component: {fileID: 2594156833176159739}
@@ -256,6 +278,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1054172516347119929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5953181067369513809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8a49adba1452b4f99c427067cb22f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WhisperProcess
+  model: {fileID: 4346045216429571892}
 --- !u!114 &5265889848092626251
 MonoBehaviour:
   m_ObjectHideFlags: 0
