@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class AudioTimer : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float delayFromAwake = 0.0f;
+    [SerializeField] private AudioSource audioSource;
 
-    // Update is called once per frame
-    void Update()
+    private bool played = false;
+
+    void FixedUpdate()
     {
+        // Check if timer is out
+        if (delayFromAwake <= 0 && !played)
+        {
+            // Play the audio
+            audioSource.Play();
+            played = true;
+        }
+        else
+        {
+            delayFromAwake -= Time.fixedDeltaTime;
+        }
         
     }
 }
