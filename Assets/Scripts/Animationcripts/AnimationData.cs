@@ -25,8 +25,8 @@ public class AnimationData : MonoBehaviour
     protected Action parallelAction;
     protected Action onCompleteAction;
 
-    [SerializeField] public readonly int IncomingFlag = 0;
-    [SerializeField] public readonly int OutgoingFlag = 1;
+    [SerializeField] public int IncomingFlag = 0;
+    [SerializeField] public int OutgoingFlag = 1;
 
     public string Name { get { return nameID; } }
 
@@ -46,6 +46,10 @@ public class AnimationData : MonoBehaviour
         {
             parallelAction = ExtraActionImplementations.GetAction(parallelActionID);
         }
+    }
+    protected virtual void OnDestroy()
+    {
+        transform.DOKill();
     }
 
     /// <summary>

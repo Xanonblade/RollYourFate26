@@ -154,8 +154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RunWhisper
   audioClip: {fileID: 0}
-  audioDecoder1: {fileID: 5022602860645237092, guid: d1916c922ef0b44efa1dbe4da2401bfd, type: 3}
-  audioDecoder2: {fileID: 5022602860645237092, guid: e3a5552ed110b49c9a252ef5d18d3bbd, type: 3}
+  audioDecoder1: {fileID: 5022602860645237092, guid: 650faf99c902c5048a58c60d44b72967, type: 3}
+  audioDecoder2: {fileID: 5022602860645237092, guid: 64e124432e1e379498fac0baf779734a, type: 3}
   audioEncoder: {fileID: 5022602860645237092, guid: 7ec644b8281195945b55901ba69f40c8, type: 3}
   logMelSpectro: {fileID: 5022602860645237092, guid: 152c7cee1b148a3449f904ab30368c22, type: 3}
   vocabAsset: {fileID: 4900000, guid: 19673ddddfa45f64182b645f4a034877, type: 3}

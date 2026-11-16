@@ -6,11 +6,14 @@ using UnityEngine;
 
 public class HoverSymbol : MonoBehaviour
 {
-    const int ICON_PIXEL_SIZE = 100;
+    const int ICON_PIXEL_SIZE = 200;
     const int SPELL_NUMBER = 8;
 
-    [SerializeField] Texture2D burnIcon;
-    [SerializeField] Texture2D growIcon;
+    [SerializeField] Sprite burnIcon;
+    [SerializeField] Sprite growIcon;
+    [SerializeField] Sprite pullIcon;
+    [SerializeField] Sprite zapIcon;
+    [SerializeField] Sprite openIcon;
 
     SpriteRenderer[] sprites;
 
@@ -28,7 +31,7 @@ public class HoverSymbol : MonoBehaviour
 
     public void UpdateTexture(List<Spells> validSpells)
     {
-        List<Texture2D> validSymbols = new();
+        List<Sprite> validSymbols = new();
 
         foreach (Spells spell in validSpells)
         {
@@ -39,6 +42,15 @@ public class HoverSymbol : MonoBehaviour
                     break;
                 case Spells.Grow:
                     validSymbols.Add(growIcon);
+                    break;
+                case Spells.Pull:
+                    validSymbols.Add(pullIcon);
+                    break;
+                case Spells.Unlock:
+                    validSymbols.Add(openIcon);
+                    break;
+                case Spells.Zap:
+                    validSymbols.Add(zapIcon);
                     break;
             }
         }
@@ -53,7 +65,7 @@ public class HoverSymbol : MonoBehaviour
             sprites[i].transform.position = transform.position + transform.right * (-1 * ((validSymbols.Count - 1) / 2f) + 1 * i);
 
             sprites[i].gameObject.SetActive(true);
-            sprites[i].sprite = Sprite.Create(validSymbols[i], new Rect(0, 0, ICON_PIXEL_SIZE, ICON_PIXEL_SIZE), Vector2.zero);
+            sprites[i].sprite = validSymbols[i];
         }
         /*
         for (int i = 0; i < validSymbols.Count; i++)

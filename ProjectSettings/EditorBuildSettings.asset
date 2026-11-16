@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Game.unity
     guid: e7f5dcbc15b7c324ca20a4bd9944e866
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/EraScenes/Medieval.unity
     guid: d0a01916d1cbe9c4590d8562560e25ed
   - enabled: 1

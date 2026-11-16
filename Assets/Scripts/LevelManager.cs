@@ -9,8 +9,6 @@ public enum Scenario
 {
     Train,
     Duel,
-    WitchTrial,
-    Jousting,
     FreeFall,
     Airlock
 }
@@ -18,7 +16,6 @@ public enum Scenario
 enum Era
 {
     WildWest,
-    Medieval,
     Future
 }
 
@@ -28,21 +25,23 @@ public static class LevelManager
         { Scenario.Train, new Tuple<Era, int>(Era.WildWest, 0) },
         { Scenario.Duel, new Tuple < Era, int >(Era.WildWest, 1) },
         //{ Scenario.FreeFall, new Tuple < Era, int >(Era.Future, 0) },
-        //{ Scenario.Airlock, new Tuple < Era, int >(Era.Future, 1) },
+        { Scenario.Airlock, new Tuple < Era, int >(Era.Future, 0) },
     };
 
     private static Dictionary<Era, int> eraSceneIDs = new Dictionary<Era, int>() {
-        {Era.WildWest, 2 },
-        {Era.Medieval, 1 },
-        {Era.Future, 3 }
+        {Era.WildWest, 1 },
+        {Era.Future, 2 }
     };
 
     private static Dictionary<Scenario, Tuple<float, float>> playerMinMaxPitch = new Dictionary<Scenario, Tuple<float, float>>() {
-        { Scenario.Train, new Tuple<float, float>(-65f, 60f) }
+        { Scenario.Train, new Tuple<float, float>(-65f, 60f) },
+        { Scenario.Airlock, new Tuple<float, float>(-65f, 60f) },
+        {Scenario.Duel, new Tuple<float, float>(-180f, 180f) }
     };
 
     private static Dictionary<Scenario, Tuple<float, float>> playerMinMaxYaw = new Dictionary<Scenario, Tuple<float, float>>() {
-        { Scenario.Train, new Tuple<float, float>(-80f, 80f) }
+        { Scenario.Train, new Tuple<float, float>(-80f, 80f) },
+        { Scenario.Airlock, new Tuple<float, float>(-8000f, 8000f) },
     };
 
     private static List<Scenario> uncompletedScenarios;
@@ -132,5 +131,11 @@ public static class LevelManager
         spawnTransform = GameObject.FindWithTag("SpawnPoints")
             .GetComponent<SpawnPoints>()
             .SpawnPointsList[scenarioData.Item2];
+    }
+
+    public static void RestartLevel()
+    {
+        //load corresponding era scene
+        SceneManager.LoadScene(eraSceneIDs[scenarioIDs[CurrentScenario].Item1]);
     }
 }

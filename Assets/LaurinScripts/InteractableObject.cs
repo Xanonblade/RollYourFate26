@@ -12,7 +12,11 @@ public enum Spells
     Zap,
     Goopify, //Squash object vertically, stretch it out horizontally
     Unlock,  //Unlock anything locked, whether a box, door, etc
-    Cleave   //Cuts objects in half
+    Cleave,   //Cuts objects in half
+    Three,
+    Two,
+    Nine,
+    Zero
 }
 
 [RequireComponent(typeof(Collider))]

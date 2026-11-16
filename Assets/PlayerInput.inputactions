@@ -16,9 +16,27 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Shift",
+                    "name": "Open Spellbook",
                     "type": "Button",
-                    "id": "ddebf2c8-5a8d-4af2-b55e-c83a89006734",
+                    "id": "f8b1c420-1153-41e7-9ecd-cf45312562a5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Flip Page Left",
+                    "type": "Button",
+                    "id": "333f6f81-2e82-4fdd-9eb9-c6c7d95a2af0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Flip Page Right",
+                    "type": "Button",
+                    "id": "01db5c6b-a93d-4115-87ac-880dbcd2e359",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -39,12 +57,56 @@
                 },
                 {
                     "name": "",
-                    "id": "9ff4ad23-2ce5-4dd0-9744-9303b1870092",
-                    "path": "<Keyboard>/leftShift",
+                    "id": "db7d06c9-409d-4912-96ed-7777509fe7d1",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shift",
+                    "action": "Open Spellbook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c68947f8-737a-4f4b-bf1b-11f7d104a8b5",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flip Page Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ead2b27d-7964-4077-acf2-c21053385431",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flip Page Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "95ea45b2-3399-40b4-ac38-0435655d7517",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flip Page Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a78d0c44-d63e-44b0-89ef-912398cde3ab",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flip Page Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
